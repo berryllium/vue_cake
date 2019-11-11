@@ -1,34 +1,43 @@
 <template>
   <div class="products">
-    <product-item v-for="item in products" :item="item" :key="item.id" />
+    <loader v-if="loading" />
+    <product-item v-else v-for="item in products" :item="item" :key="item.id" />
   </div>
 </template>
 
 <script>
 import PruductItem from "@/components/ProductItem";
+import Loader from "@/components/Loader";
 export default {
   components: {
-    "product-item": PruductItem
+    "product-item": PruductItem,
+    loader: Loader
   },
   data() {
     return {
+      loading: true,
       products: []
     };
   },
   mounted() {
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then(response => response.json())
-      .then(json => (this.products = json));
+      .then(json => {
+        setTimeout(() => {
+          this.products = json;
+          this.loading = false;
+        },2000);
+      });
   }
 };
 </script>
 
 <style lang="less" scoped>
-@import '../style/variables.less';
+@import "../style/variables.less";
 .products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: (1200-350*3)/2px;
+  gap: (1200-350 * 3)/2px;
   padding: 20px 0;
   @media (max-width: @phone) {
     width: 100%;

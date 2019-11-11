@@ -25,14 +25,17 @@ export default {
       $(this).toggleClass("menu-btn_active");
       $("nav").animate({ width: "toggle" }, 350);
     });
-    $('.nav-item').on("click", () => {
+    if (screen.width < 768) {
+      $('.nav-item').on("click", () => {
       $(".menu-btn").trigger("click")
     })
+    }
   }
 };
 </script>
 
 <style lang="less">
 @import url("style/normalize.css");
+@import url("style/variables.less");
 @import url("style/style.less");
 </style>
