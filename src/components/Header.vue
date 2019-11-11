@@ -38,47 +38,48 @@
   </header>
 </template>
 
+
 <style scoped lang="less">
-@import '../style/variables.less';
-  header {
+@import "../style/variables.less";
+header {
   margin-bottom: 15px;
 
   .top-menu {
-    position       : relative;
-    display        : flex;
+    position: relative;
+    display: flex;
     justify-content: space-between;
-    padding-top     : 20px;
+    padding-top: 20px;
 
     .menu-btn {
-      display         : none;
-      position        : absolute;
-      z-index         : 2;
-      justify-content : center;
-      top             : 10px;
-      left            : 10px;
-      width           : 40px;
-      height          : 40px;
-      border-radius   : 20px;
+      display: none;
+      position: absolute;
+      z-index: 2;
+      justify-content: center;
+      top: 10px;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
       background-color: @braun;
 
       span,
       span:before,
       span:after {
-        position        : absolute;
-        display         : block;
-        top             : 50%;
-        margin-top      : -1px;
-        left            : 50%;
-        margin-left     : -10px;
-        width           : 20px;
-        height          : 2px;
+        position: absolute;
+        display: block;
+        top: 50%;
+        margin-top: -1px;
+        left: 50%;
+        margin-left: -10px;
+        width: 20px;
+        height: 2px;
         background-color: #fff;
       }
 
       span:before,
       span:after {
-        content         : '';
-        transition      : .5s;
+        content: "";
+        transition: 0.5s;
         transform-origin: left bottom;
       }
 
@@ -96,7 +97,6 @@
     }
 
     .menu-btn_active {
-
       span:before,
       span:after {
         width: 10px;
@@ -112,48 +112,47 @@
     }
 
     .logo {
-      display       : flex;
+      display: flex;
       text-transform: uppercase;
-      align-items   : center;
+      align-items: center;
 
       img {
         @media (max-width: @phone) {
-          width      : 150px;
+          width: 150px;
           margin-left: 70px;
         }
       }
-
     }
 
     nav {
-      display    : flex;
+      display: flex;
       align-items: flex-end;
 
       @media (max-width: @phone) {
-        display         : none;
-        position        : absolute;
-        z-index         : 1;
+        display: none;
+        position: absolute;
+        z-index: 1;
         background-color: @braun;
-        top             : 0;
-        left            : 0;
-        width           : 100vw;
-        height          : 100vh;
-        align-items     : flex-start;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        align-items: flex-start;
       }
 
       ul {
-        margin         : 0;
-        padding        : 0;
+        margin: 0;
+        padding: 0;
         list-style-type: none;
-        display        : flex;
-        align-items    : center;
+        display: flex;
+        align-items: center;
         justify-content: space-between;
 
         @media (max-width: @phone) {
           flex-direction: column;
-          align-items   : flex-start;
-          margin-top    : 70px;
-          min-width     : 340px;
+          align-items: flex-start;
+          margin-top: 70px;
+          min-width: 340px;
         }
 
         .nav-item {
@@ -162,15 +161,15 @@
           }
 
           a {
-            color          : @braun;
-            font-weight    : 700;
-            border         : none;
-            text-transform : uppercase;
+            color: @braun;
+            font-weight: 700;
+            border: none;
+            text-transform: uppercase;
             text-decoration: none;
-            padding        : 10px 0;
-            margin         : 20px;
-            font-size      : 24px;
-            transition     : .2s;
+            padding: 10px 0;
+            margin: 20px;
+            font-size: 24px;
+            transition: 0.2s;
 
             @media (max-width: @phone) {
               color: @yellow;
@@ -179,37 +178,37 @@
             &:hover {
               border-bottom: 3px solid @braun;
 
-              @media (max-width: @phone) {}
+              @media (max-width: @phone) {
+              }
             }
           }
         }
       }
-
     }
 
     .cart {
-      position       : relative;
-      font-size      : 32px;
-      display        : flex;
-      align-items    : flex-end;
+      position: relative;
+      font-size: 32px;
+      display: flex;
+      align-items: flex-end;
       justify-content: flex-start;
-      margin-right   : 20px;
+      margin-right: 20px;
 
       i {
         color: @braun;
       }
 
       .cart-count {
-        position        : absolute;
-        display         : flex;
-        justify-content : center;
-        align-items     : center;
-        right           : -15px;
-        bottom          : 15px;
-        font-size       : 16px;
-        height          : 20px;
-        width           : 20px;
-        border-radius   : 10px;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: -15px;
+        bottom: 15px;
+        font-size: 16px;
+        height: 20px;
+        width: 20px;
+        border-radius: 10px;
         background-color: @yellow;
       }
     }

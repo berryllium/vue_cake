@@ -1,9 +1,8 @@
 <template>
-<main>
     <section class="intro">
       <div class="container">
         <div class="left">
-          <h1>Кондитерская на дому</h1>
+          <h2>Кондитерская на дому</h2>
           <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores eveniet enim.
             Fuga aliquid molestias quia veniam voluptatibus inventore dignissimos dolorem quisquam accusantium?
             Reprehenderit reiciendis asperiores fuga, saepe et illo quidem facilis voluptatum corporis, qui, quisquam
@@ -27,7 +26,6 @@
         </div>
       </div>
     </section>
-  </main>
 </template>
 
 <style lang="less" scoped>
@@ -41,12 +39,13 @@ main {
     background-size  : cover;
     background-repeat: no-repeat;
     min-height       : 800px;
-
+    @media (max-width: @phone) {
+       background-position: 50%;
+    }
     .container {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
-      margin-top: 50px;
       .left,
       .right {
         width  : 50%;

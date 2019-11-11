@@ -40,7 +40,7 @@ footer {
   background-color: @braun;
   .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     color: #c3c3c3;
     a {
       text-decoration: none;
