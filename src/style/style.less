@@ -1,0 +1,24 @@
+@import 'variables.less';
+body {
+  font-family: sans-serif;
+}
+
+h1 {
+  margin : 0;
+  padding: 0;
+}
+div {
+  box-sizing: border-box;
+}
+.container {
+  margin: 0 auto;
+  width : 1200px;
+
+  @media (max-width: @phone) {
+    width: 100%;
+  }
+}
+section {
+  position: relative;
+}
+
