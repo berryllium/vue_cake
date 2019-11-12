@@ -42,7 +42,8 @@
 <style scoped lang="less">
 @import "../style/variables.less";
 header {
-  margin-bottom: 15px;
+  padding-bottom: 15px;
+  background-color: lighten(@braun, 45%);
 
   .top-menu {
     position: relative;

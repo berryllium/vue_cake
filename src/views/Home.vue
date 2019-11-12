@@ -8,9 +8,7 @@
             Reprehenderit reiciendis asperiores fuga, saepe et illo quidem facilis voluptatum corporis, qui, quisquam
             magni esse dicta doloremque pariatur quaerat veniam cum? Aperiam, vitae facilis obcaecati, quis laborum ut
             inventore quidem recusandae totam quam distinctio perferendis expedita porro eius deleniti. Sunt qui
-            pariatur sit fuga, nemo quia necessitatibus omnis assumenda! Necessitatibus beatae aperiam deserunt nesciunt
-            nostrum in, nulla ex doloribus ut eos velit consequuntur consectetur consequatur at officiis enim illum odit
-            id excepturi dolorem blanditiis aspernatur ullam. Esse.</div>
+            pariatur sit fuga, nemo quia necessitatibu.</div>
         </div>
         <div class="right">
           <div class="main-form">
@@ -46,6 +44,7 @@ main {
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+      padding-top: 50px;
       .left,
       .right {
         width  : 50%;
@@ -59,8 +58,10 @@ main {
       .left {
         color: #fff;
 
-        h1 {
+        h2 {
+          margin-top: 0;
           margin-bottom: 30px;
+          text-transform: uppercase;
         }
 
         .text {
