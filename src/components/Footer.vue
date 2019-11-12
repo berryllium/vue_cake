@@ -9,7 +9,7 @@
         <h3>Наши контакты</h3>
         <p>
           Звоните:
-          <a href="tel:+79999999999">+79999999999</a>
+          <a :href="'tel:'+phone">{{phone}}</a>
         </p>
         <p>
           Пишите:
@@ -33,6 +33,11 @@
     </div>
   </footer>
 </template>
+<script>
+export default {
+  props: ['phone']
+}
+</script>
 
 <style lang="less" scoped>
 @import "../style/variables.less";

@@ -26,7 +26,7 @@ export default {
         setTimeout(() => {
           this.products = json;
           this.loading = false;
-        },2000);
+        },500);
       });
   }
 };

@@ -4,21 +4,26 @@
   <main>
     <router-view />
   </main>
-  <Footer />
+  <Footer :phone="phone"/>
 </body>
 </template>
 
 <script>
-import $ from 'jquery'
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
+import $ from "jquery";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 export default {
   name: "app",
   components: {
     Header,
     Footer
   },
-    mounted() {
+  data() {
+    return {
+      phone: "+79999999999"
+    };
+  },
+  mounted() {
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
       e.preventDefault();
@@ -26,9 +31,9 @@ export default {
       $("nav").animate({ width: "toggle" }, 350);
     });
     if (screen.width < 768) {
-      $('.nav-item').on("click", () => {
-      $(".menu-btn").trigger("click")
-    })
+      $(".nav-item").on("click", () => {
+        $(".menu-btn").trigger("click");
+      });
     }
   }
 };
