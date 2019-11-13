@@ -11,20 +11,24 @@ export default new Router({
       component: Home
     },
     {
-      path: '/catalog',
+      path: '/каталог',
       component: () => import('./views/Catalog.vue')
     },
     {
-      path: '/about',
+      path: '/о_нас',
       component: () => import('./views/About.vue')
     },
     {
-      path: '/delivery',
+      path: '/доставка',
       component: () => import('./views/Delivery.vue')
     },
     {
-      path: '/contacts',
+      path: '/контакты',
       component: () => import('./views/Contacts.vue')
+    },
+    {
+      path: '/корзина',
+      component: () => import('./views/Cart.vue')
     },
   ]
 })

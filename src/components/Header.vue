@@ -14,25 +14,23 @@
               <router-link to="/">Главная</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/catalog">Каталог</router-link>
+              <router-link to="/каталог">Каталог</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/about">О нас</router-link>
+              <router-link to="/о_нас">О нас</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/delivery">Доставка</router-link>
+              <router-link to="/доставка">Доставка</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/contacts">Контакты</router-link>
+              <router-link to="/контакты">Контакты</router-link>
             </li>
           </ul>
         </nav>
-        <div class="cart">
-          <a to="/">
-            <i class="fa fa-shopping-cart"></i>
-          </a>
+        <router-link to="/корзина" class="cart">
+          <i class="fa fa-shopping-cart"></i>
           <div class="cart-count">3</div>
-        </div>
+        </router-link>
       </div>
     </div>
   </header>
@@ -194,9 +192,13 @@ header {
       align-items: flex-end;
       justify-content: flex-start;
       margin-right: 20px;
+      text-decoration: none;
 
       i {
         color: @braun;
+        &:hover {
+          color: darken(@braun, 10%);
+        }
       }
 
       .cart-count {
@@ -210,7 +212,8 @@ header {
         height: 20px;
         width: 20px;
         border-radius: 10px;
-        background-color: @yellow;
+        background-color: @orange;
+        color: #fff;
       }
     }
   }

@@ -1,10 +1,10 @@
 <template>
 <body>
-  <Header />
+  <Header :contacts="contacts" />
   <main>
-    <router-view />
+    <router-view :contacts="contacts" :goods="goods" />
   </main>
-  <Footer :phone="phone"/>
+  <Footer :contacts="contacts" />
 </body>
 </template>
 
@@ -20,10 +20,22 @@ export default {
   },
   data() {
     return {
-      phone: "+79999999999"
-    };
+      goods: {
+        loading: true,
+        products: []
+      },
+      contacts: {
+        phone: "+7(967)539-02-99",
+        email: "test@yandex.ru"
+      }
+    }
   },
   mounted() {
+    fetch("db/catalog.json")
+      .then(response => response.json())
+      .then(json => {
+        this.$store.commit('fetchGoods', json);
+      });
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
       e.preventDefault();
@@ -34,7 +46,7 @@ export default {
       $(".nav-item").on("click", () => {
         $(".menu-btn").trigger("click");
       });
-    }
+    };
   }
 };
 </script>

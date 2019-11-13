@@ -6,8 +6,8 @@
         <div class="map">
           <iframe
             src="https://yandex.ru/map-widget/v1/?um=constructor%3Acdda55db439583887354173f87b390bf93f3ddf89dd8b787aa37b66b1e2bb87d&amp;source=constructor"
-            width="550"
-            height="400"
+            :width="mapWidth"
+            :height="mapHeight"
             frameborder="0"
           ></iframe>
           <address>
@@ -16,10 +16,12 @@
               <span>c.Натальино, ул. Революционная, д.93</span>
             </p>
             <p>
-              <i class="fa fa-envelope-o"></i><a href="mailto: test@yandex.ru">test@yandex.ru</a>
+              <i class="fa fa-envelope-o"></i>
+              <a :href="'mailto: ' + contacts.email">{{contacts.email}}</a>
             </p>
             <p>
-              <i class="fa fa-phone"></i><a href="tel:+79999999999"></a>
+              <i class="fa fa-phone"></i>
+              <a :href="'tel: ' + contacts.phone">{{contacts.phone}}</a>
             </p>
           </address>
         </div>
@@ -41,12 +43,18 @@
 
 <script>
 export default {
-  name: 'Contacts',
-  mounted() {
-    console.log('ok')
-    console.log(this.$root.$data)
+  props: ["contacts"],
+  computed: {
+    mapWidth () {
+      if (document.documentElement.clientWidth > 768) return 550
+      else return document.documentElement.clientWidth
+    },
+    mapHeight() {
+      if (document.documentElement.clientWidth > 768) return 400
+      else return 250
+    }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
@@ -55,13 +63,33 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  iframe {
+    @media (max-width: @phone) {
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+  }
   address {
     width: 100%;
     padding: 20px;
+    box-sizing: border-box;
+    p {
+      font-size: 18px;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+    }
+    i {
+      color: @orange;
+    }
+    span,
+    a {
+      color: @braun;
+      text-decoration: none;
+    }
   }
   .contact-form {
     background-color: @braun;
-    width: 50%;
+    width: 47%;
     padding: 20px;
     text-align: center;
     color: #fff;

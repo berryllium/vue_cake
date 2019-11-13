@@ -9,7 +9,7 @@
         <h3>Наши контакты</h3>
         <p>
           Звоните:
-          <a :href="'tel:'+phone">{{phone}}</a>
+          <a :href="'tel:'+contacts.phone">{{contacts.phone}}</a>
         </p>
         <p>
           Пишите:
@@ -35,7 +35,7 @@
 </template>
 <script>
 export default {
-  props: ['phone']
+  props: ['contacts']
 }
 </script>
 
