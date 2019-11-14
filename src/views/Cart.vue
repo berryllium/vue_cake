@@ -12,13 +12,12 @@
         />
       </div>
       <div class="result">
-        <h3>Ваш заказ</h3>
+        <h3>Оформите заказ</h3>
         <div class="result-price">
-          {{sum}} <span>руб.</span>
+          {{sum}}
+          <span>руб.</span>
         </div>
-        <div class="ps">
-          *Детали обсуждаются при уточнении заказа
-        </div>
+        <div class="ps">*Детали обсуждаются при уточнении заказа</div>
         <button class="cart-order">Оформить</button>
       </div>
     </div>
@@ -34,28 +33,35 @@ export default {
   },
   methods: mapMutations(["addToCart", "removeFromCart"]),
   computed: {
-    ...mapGetters(["allCart","cartSum"]),
+    ...mapGetters(["allCart", "cartSum"]),
     sum() {
-      let sum = 0
+      let sum = 0;
       this.allCart.forEach(element => {
-        sum += element.price * element.count
-      })
-      return sum
+        sum += element.price * element.count;
+      });
+      return sum;
     }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
-@import '../style/variables.less';
+@import "../style/variables.less";
 .cart-wrap {
   display: flex;
+  @media (max-width: @phone) {
+    flex-direction: column;
+  }
   .cart-items {
     width: 60%;
+    @media (max-width: @phone) {
+      width: 100%;
+    }
   }
   .result {
     width: 40%;
     h3 {
+      text-transform: uppercase;
       font-size: 36px;
       padding: 0;
       margin: 0;
@@ -89,9 +95,16 @@ export default {
         background-color: darken(@orange, 10%);
       }
       &:active {
-          transform: scale(0.95);
-        }
+        transform: scale(0.95);
+      }
     }
+        @media (max-width: @phone) {
+        width: 100%;
+        .result-price {
+          margin-top: 20px;
+          font-size: 28px;
+        }
+      }
   }
 }
 </style>

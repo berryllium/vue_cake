@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       isAdded: true
-    }
+    };
   },
   computed: {
     ...mapGetters(["allCart"])
@@ -37,7 +37,7 @@ export default {
     }
   },
   mounted() {
-    this.getStatus()
+    this.getStatus();
   }
 };
 </script>
@@ -50,6 +50,9 @@ export default {
     width: 350px;
     height: 250px;
     object-fit: cover;
+    @media (max-width: @phone) {
+      width: 100%;
+    }
   }
   .info {
     padding: 20px;
