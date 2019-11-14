@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     getCount() {
-      this.count = this.$store.getters.getCountById(this.item.id).count
+      const item = this.$store.getters.getCartItem(this.item.id)
+      if (item) this.count = item.count
     },
     add() {
       this.$store.commit("changeCart", {id: this.item.id, action: 'add'});

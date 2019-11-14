@@ -14,8 +14,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getCountById: state => id => {
-      return state.goods.products.find(item => item.id === id);
+    getCartItem: state => id => {
+      return state.cart.products.find(item => item.id === id);
     }
   },
   mutations: {
@@ -26,20 +26,32 @@ export default new Vuex.Store({
       state.goods.products = goods
       state.goods.loading = false
     },
-    newBuy(state, id) {
-      let item = state.goods.products.find((item) => item.id === id)
-      if (item.count) {
-        state.cart.products = state.cart.products.filter(el => el != item)
-        delete item.count
-      } else {
-        item.count = 1
-        state.cart.products.push(item)
+    addToCart(state, item) {
+      let cartItem = state.cart.products.find((el) => el.id === item.id)
+      if (cartItem) cartItem.count++
+      else {
+        let newItem = Object.assign(item,{count: 1})
+        state.cart.products.push(newItem)
       }
+
+    },
+    removeFromCart(state, item) {
+      let cartItem = state.cart.products.find((el) => el.id === item.id)
+      if (cartItem.count < 1) {
+        state.cart.products = state.cart.products.filter(el => el != item)
+      } else {
+        cartItem.count --
+      }
+    },
+    clickBuy(state, item) {
+      if(state.cart.products.find((el) => el.id === item.id)) {
+        state.cart.products = state.cart.products.filter(el => el != item)
+      }
+      else this.commit('addToCart',item)
     },
     changeCart(state, param) {
       const id = param.id
       const action = param.action
-      console.log(action+id)
       let item = state.cart.products.find((item) => item.id === id)
       if (action == 'add') {
         item.count ++

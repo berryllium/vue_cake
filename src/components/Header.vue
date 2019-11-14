@@ -29,13 +29,26 @@
         </nav>
         <router-link to="/корзина" class="cart">
           <i class="fa fa-shopping-cart"></i>
-          <div class="cart-count">3</div>
+          <div class="cart-count">{{count}}</div>
         </router-link>
       </div>
     </div>
   </header>
 </template>
-
+<script>
+export default {
+watch: {
+  count() {
+    if (this.$store.cart) return this.$store.cart.product.length || 0
+  }
+},
+  mounted() {
+    this.$store.subscribe((mutation, state) => {
+      console.log(mutation.type);
+    });
+  }
+}
+</script>
 
 <style scoped lang="less">
 @import "../style/variables.less";

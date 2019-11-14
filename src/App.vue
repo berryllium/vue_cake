@@ -28,13 +28,13 @@ export default {
         phone: "+7(967)539-02-99",
         email: "test@yandex.ru"
       }
-    }
+    };
   },
   mounted() {
     fetch("db/catalog.json")
       .then(response => response.json())
       .then(json => {
-        this.$store.commit('fetchGoods', json);
+        this.$store.commit("fetchGoods", json);
       });
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
@@ -46,7 +46,7 @@ export default {
       $(".nav-item").on("click", () => {
         $(".menu-btn").trigger("click");
       });
-    };
+    }
   }
 };
 </script>

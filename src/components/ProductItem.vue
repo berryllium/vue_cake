@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     checkAdd() {
-      this.isAdded = this.$store.getters.getCountById(this.item.id).count ? true : false;
+      this.isAdded = this.$store.getters.getCartItem(this.item.id) ? true : false;
     },
     toCart() {
-      this.$store.commit("newBuy", this.item.id);
+      this.$store.commit("clickBuy", this.item);
       this.checkAdd()
     }
   },
