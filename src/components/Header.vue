@@ -29,7 +29,7 @@
         </nav>
         <router-link to="/корзина" class="cart">
           <i class="fa fa-shopping-cart"></i>
-          <div class="cart-count"></div>
+          <div class="cart-count" v-if="cart.length">{{cart.length}}</div>
         </router-link>
       </div>
     </div>
@@ -37,10 +37,11 @@
 </template>
 <script>
 export default {
+  props: ['cart'],
   mounted() {
-    this.$store.subscribe((mutation, state) => {
-      console.log(mutation.type);
-    });
+    // this.$store.subscribe((mutation, state) => {
+    //   console.log(mutation.type);
+    // });
   }
 }
 </script>

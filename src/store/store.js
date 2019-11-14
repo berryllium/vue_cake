@@ -10,7 +10,7 @@ export default new Vuex.Store({
     catalog,
     cart
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState()],
 })
 
 

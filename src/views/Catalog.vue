@@ -3,16 +3,23 @@
     <h1>Наш ассортимент</h1>
     <div class="products">
       <loader v-if="loading" />
-      <product-item v-else v-for="item in products" :item="item" :key="item.id" />
+      <product-item v-else v-for="item in products" :item="item" :key="item.id" @buy="clickBuy(item)"/>
     </div>
   </section>
 </template>
 
 <script>
-import PruductItem from "@/components/ProductItem";
-import Loader from "@/components/Loader";
+import PruductItem from '@/components/ProductItem'
+import Loader from '@/components/Loader'
+import {mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
   props: ['products', 'loading'],
+  methods: {
+    ...mapMutations(['clickBuy']),
+  },
+  computed: {
+    ...mapGetters(['allCart']),
+  },
   components: {
     "product-item": PruductItem,
     loader: Loader

@@ -1,30 +1,33 @@
 <template>
-  <div :item="item" class="product-item">
+  <div class="product-item">
     <img :src="this.item.img" alt="photo" />
     <div class="info">
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/кг</div>
       <div class="desc">Описание</div>
-      <button class="buy" @click="console.log('toCart')" :class="{added: isAdded}">{{status}}</button>
+      <button class="buy" @click="buy" :class="{added: this.isAdded}">{{status}}</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["item"],
   data() {
     return {
       isAdded: false
-    };
+    }
   },
+  props: ['item'],
   computed: {
     status() {
       return this.isAdded ? "В корзине" : "В корзину";
     }
   },
   methods: {
-
+    buy() {
+      this.$emit('buy', this.item.id)
+      this.isAdded = !this.isAdded
+    }
   },
   mounted() {
 

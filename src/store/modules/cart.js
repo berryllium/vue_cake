@@ -3,6 +3,27 @@ export default {
     getLocalCart(state, cart) {
       cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
       state.cart = cart
+    },
+    clickBuy(state, item) {
+      let product = state.cart.find((el) => el.id === item.id)
+      if (product) state.cart = state.cart.filter(function(el) {return el !== product})
+      else {
+        product = Object.assign({count: 1},item)
+        state.cart.push(product)
+      }
+    },
+    addToCart(state, item) {
+      let product = state.cart.find((el) => el.id === item.id)
+      if (product) product.count ++
+      else {
+        product = Object.assign({count: 1},item)
+        state.cart.push(product)
+      }
+    },
+    removeFromCart(state, item) {
+      let product = state.cart.find((el) => el.id === item.id)
+      if (product.count > 1) product.count --
+      else state.cart = state.cart.filter(function(el) {return el !== product})
     }
   },
   state: {

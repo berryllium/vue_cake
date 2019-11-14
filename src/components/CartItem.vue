@@ -1,12 +1,12 @@
 <template>
-  <div :item="item" class="cart-item">
+  <div class="cart-item">
     <img :src="this.item.img" alt="photo" />
     <div class="info">
       <div class="name">{{this.item.name}}</div>
       <div class="desc">Описание</div>
       <div class="counter">
         <button class="plus-btn" @click="add">+</button>
-      <div class="count-item">{{count}}</div>
+      <div class="count-item">{{this.item.count}}</div>
       <button class="minus-btn" @click="sub">-</button>
       </div>
       
@@ -25,21 +25,15 @@ export default {
     };
   },
   methods: {
-    getCount() {
-      const item = this.$store.getters.getCartItem(this.item.id)
-      if (item) this.count = item.count
-    },
     add() {
-      this.$store.commit("changeCart", {id: this.item.id, action: 'add'});
-      this.getCount()
+      this.$emit('add', this.item)
     },
     sub() {
-      this.$store.commit("changeCart", {id: this.item.id, action: 'sub'});
-      this.getCount()
+      this.$emit('sub', this.item)
     }
   },
   mounted() {
-    this.getCount()
+
   }
 };
 </script>

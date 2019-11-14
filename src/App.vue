@@ -1,7 +1,6 @@
 <template>
 <body>
-  {{allCart[0]}}
-  <Header :contacts="contacts" />
+  <Header :contacts="contacts" :cart="allCart"/>
   <main>
     <router-view :contacts="contacts" :products="allCatalog" :loading = "loadingState"/>
   </main>
@@ -29,7 +28,9 @@ export default {
     };
   },
   computed: mapGetters(['allCatalog','loadingState','allCart']),
-  methods: mapActions(['fetchCatalog']),
+  methods: {
+    ...mapActions(['fetchCatalog'])
+  },
   mounted() {
     this.fetchCatalog()
     this.$store.commit('getLocalCart')
