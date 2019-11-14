@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <h1>Корзина</h1>
-    <div class="cart-wrap">
+    <div class="cart-wrap" v-if="this.sum">
       <div class="cart-items">
         <cart-item
           v-for="item in allCart"
@@ -21,6 +21,7 @@
         <button class="cart-order">Оформить</button>
       </div>
     </div>
+    <div class="nothing" v-else>Вы еще ничего не выбрали</div>
   </section>
 </template>
 
@@ -33,7 +34,7 @@ export default {
   },
   methods: mapMutations(["addToCart", "removeFromCart"]),
   computed: {
-    ...mapGetters(["allCart", "cartSum"]),
+    ...mapGetters(["allCart"]),
     sum() {
       let sum = 0;
       this.allCart.forEach(element => {
@@ -47,6 +48,11 @@ export default {
 
 <style lang="less" scoped>
 @import "../style/variables.less";
+.nothing {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
 .cart-wrap {
   display: flex;
   @media (max-width: @phone) {
