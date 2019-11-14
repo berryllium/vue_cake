@@ -71,6 +71,7 @@ export default {
       width: 150px;
       height: 30px;
       border: none;
+      border-radius: 15px;
       outline: none;
       background-color: @braun;
       color: #fff;

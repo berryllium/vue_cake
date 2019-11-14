@@ -1,9 +1,5 @@
 export default {
   mutations: {
-    getLocalCart(state, cart) {
-      cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
-      state.cart = cart
-    },
     clickBuy(state, item) {
       let product = state.cart.find((el) => el.id === item.id)
       if (product) state.cart = state.cart.filter(function(el) {return el !== product})
@@ -34,7 +30,7 @@ export default {
   },
   state: {
     cart: [],
-    jsonCart: []
+    jsonCart: "[]"
   },
   getters: {
     allCart(state) {
