@@ -12,17 +12,10 @@
 import PruductItem from "@/components/ProductItem";
 import Loader from "@/components/Loader";
 export default {
+  props: ['products', 'loading'],
   components: {
     "product-item": PruductItem,
     loader: Loader
-  },
-  computed: {
-    loading() {
-      return this.$store.state.goods.loading;
-    },
-    products() {
-      return this.$store.state.goods.products;
-    }
   }
 };
 </script>

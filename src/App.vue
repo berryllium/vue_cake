@@ -1,8 +1,9 @@
 <template>
 <body>
+  {{allCart[0]}}
   <Header :contacts="contacts" />
   <main>
-    <router-view :contacts="contacts" :goods="goods" />
+    <router-view :contacts="contacts" :products="allCatalog" :loading = "loadingState"/>
   </main>
   <Footer :contacts="contacts" />
 </body>
@@ -12,6 +13,7 @@
 import $ from "jquery";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {mapGetters, mapActions} from 'vuex'
 export default {
   name: "app",
   components: {
@@ -20,22 +22,17 @@ export default {
   },
   data() {
     return {
-      goods: {
-        loading: true,
-        products: []
-      },
       contacts: {
         phone: "+7(967)539-02-99",
         email: "test@yandex.ru"
       }
     };
   },
+  computed: mapGetters(['allCatalog','loadingState','allCart']),
+  methods: mapActions(['fetchCatalog']),
   mounted() {
-    fetch("db/catalog.json")
-      .then(response => response.json())
-      .then(json => {
-        this.$store.commit("fetchGoods", json);
-      });
+    this.fetchCatalog()
+    this.$store.commit('getLocalCart')
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
       e.preventDefault();

@@ -5,7 +5,7 @@
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/кг</div>
       <div class="desc">Описание</div>
-      <button class="buy" @click="toCart" :class="{added: isAdded}">{{status}}</button>
+      <button class="buy" @click="console.log('toCart')" :class="{added: isAdded}">{{status}}</button>
     </div>
   </div>
 </template>
@@ -24,16 +24,10 @@ export default {
     }
   },
   methods: {
-    checkAdd() {
-      this.isAdded = this.$store.getters.getCartItem(this.item.id) ? true : false;
-    },
-    toCart() {
-      this.$store.commit("clickBuy", this.item);
-      this.checkAdd()
-    }
+
   },
   mounted() {
-    this.checkAdd()
+
   }
 };
 </script>
