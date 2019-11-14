@@ -11,6 +11,7 @@ export default {
         product = Object.assign({count: 1},item)
         state.cart.push(product)
       }
+      state.jsonCart=JSON.stringify(state.cart)
     },
     addToCart(state, item) {
       let product = state.cart.find((el) => el.id === item.id)
@@ -19,23 +20,29 @@ export default {
         product = Object.assign({count: 1},item)
         state.cart.push(product)
       }
+      state.jsonCart=JSON.stringify(state.cart)
     },
     removeFromCart(state, item) {
       let product = state.cart.find((el) => el.id === item.id)
       if (product.count > 1) product.count --
       else state.cart = state.cart.filter(function(el) {return el !== product})
+      state.jsonCart=JSON.stringify(state.cart)
+    },
+    setCart(state) {
+      state.cart = JSON.parse(state.jsonCart)
     }
   },
   state: {
-    cart: []
+    cart: [],
+    jsonCart: []
   },
   getters: {
     allCart(state) {
       return state.cart
     },
-    countCart(state) {
-      return state.cart.length
-    }
+    getJsonCart(state) {
+      return state.jsonCart
+    },
   }
 }
 

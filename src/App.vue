@@ -1,8 +1,8 @@
 <template>
 <body>
-  <Header :contacts="contacts" :cart="allCart"/>
+  <Header :contacts="contacts" :cart="allCart" />
   <main>
-    <router-view :contacts="contacts" :products="allCatalog" :loading = "loadingState"/>
+    <router-view :contacts="contacts" :products="allCatalog" :loading="loadingState" />
   </main>
   <Footer :contacts="contacts" />
 </body>
@@ -12,7 +12,7 @@
 import $ from "jquery";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "app",
   components: {
@@ -27,13 +27,15 @@ export default {
       }
     };
   },
-  computed: mapGetters(['allCatalog','loadingState','allCart']),
+  computed: {
+    ...mapGetters(["allCatalog", "loadingState", "allCart","getJsonCart"])
+  },
   methods: {
-    ...mapActions(['fetchCatalog'])
+    ...mapActions(["fetchCatalog"]),
   },
   mounted() {
-    this.fetchCatalog()
-    this.$store.commit('getLocalCart')
+    this.$store.commit("setCart");
+    this.fetchCatalog();
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
       e.preventDefault();

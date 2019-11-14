@@ -5,31 +5,39 @@
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/кг</div>
       <div class="desc">Описание</div>
-      <button class="buy" @click="buy" :class="{added: this.isAdded}">{{this.isAdded ? "В корзине" : "В корзину"}}</button>
+      <button
+        class="buy"
+        @click="buy"
+        :class="{added: this.isAdded}"
+      >{{this.isAdded ? "В корзине" : "В корзину"}}</button>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-
-  props: ['item'],
-  computed: {
-    ...mapGetters(['allCart']),
-    isAdded() {
-      let status = this.allCart.find((el) => el.id == this.item.id)
-      return status ? true : false
+  props: ["item"],
+  data() {
+    return {
+      isAdded: true
     }
+  },
+  computed: {
+    ...mapGetters(["allCart"])
   },
   methods: {
     buy() {
-      this.$emit('buy', this.item.id)
-      this.isAdded = !this.isAdded
+      this.$emit("buy", this.item.id);
+      this.isAdded = !this.isAdded;
+    },
+    getStatus() {
+      let status = this.allCart.find(el => el.id == this.item.id);
+      this.isAdded = status ? true : false;
     }
   },
   mounted() {
-
+    this.getStatus()
   }
 };
 </script>
@@ -38,7 +46,6 @@ export default {
 @import "../style/variables.less";
 .product-item {
   width: 350px;
-  height: 400px;
   img {
     width: 350px;
     height: 250px;
@@ -81,7 +88,6 @@ export default {
   }
   @media (max-width: @phone) {
     width: 300px;
-    height: 300px;
     margin: 0 auto;
   }
 }

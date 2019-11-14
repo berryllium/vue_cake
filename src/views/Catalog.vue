@@ -15,7 +15,7 @@ import {mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
   props: ['products', 'loading'],
   methods: {
-    ...mapMutations(['clickBuy']),
+    ...mapMutations(['clickBuy','increment']),
   },
   computed: {
     ...mapGetters(['allCart']),

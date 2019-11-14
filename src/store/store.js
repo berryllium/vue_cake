@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
 import catalog from './modules/catalog'
 import cart from './modules/cart'
+import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -10,7 +10,9 @@ export default new Vuex.Store({
     catalog,
     cart
   },
-  plugins: [createPersistedState()],
+  plugins: [createPersistedState({
+    paths: ['cart'],
+  })]
 })
 
 
