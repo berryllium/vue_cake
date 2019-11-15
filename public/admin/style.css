@@ -1,0 +1,16 @@
+h1 {
+  text-align: center;
+  margin: 30px 0;
+}
+.form {
+  padding: 20px;
+  margin: 0 auto;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea, select {
+  margin: 10px 0;
+}
