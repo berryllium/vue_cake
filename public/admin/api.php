@@ -3,17 +3,17 @@ require_once('functions.php');
 require_once('connection.php');
 
 $query = 'SELECT * FROM products';
-      $result = mysqli_query($connection, $query);
-      while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = [
-          'id' => $row['id'],
-          'name' => $row['title'],
-          'description' => $row['description'],
-          'category' => $row['category'],
-          'price' => $row['price'],
-          'img_big' => $row['path_big'],
-          'img_small' => $row['path_small'],
-        ];
-      }
-
-json_encode($data);
+$result = mysqli_query($connection, $query);
+while ($row = mysqli_fetch_assoc($result)) {
+  $object = new stdClass();
+  $object->id = (int)$row['id'];
+  $object->name = $row['title'];
+  // $object->description = $row['description'];
+  // $object->category = $row['category'];
+  $object->price = (int)$row['price'];
+  $object->img = $row['path_big'];
+  // $object->img_small = $row['path_small'];
+  $data[] = $object;
+}
+// print_r($data);
+echo json_encode($data, JSON_UNESCAPED_UNICODE);

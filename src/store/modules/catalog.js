@@ -1,7 +1,7 @@
 export default {
   actions: {
     fetchCatalog(ctx) {
-      fetch("db/catalog.json")
+      fetch("admin/api.php")
         .then(response => response.json())
         .then(json => ctx.commit('updateCatalog', json))
     }
