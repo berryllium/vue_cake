@@ -1,0 +1,8 @@
+[
+  { 
+    "id": 0,
+    "name": "Наполеон",
+    "price": 340,
+    "img": "db/napoleon.jpg"
+  }
+]

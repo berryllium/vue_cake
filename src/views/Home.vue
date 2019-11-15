@@ -1,44 +1,80 @@
 <template>
-    <section class="intro">
-      <div class="container">
-        <div class="left">
-          <h2>Кондитерская на дому</h2>
-          <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores eveniet enim.
-            Fuga aliquid molestias quia veniam voluptatibus inventore dignissimos dolorem quisquam accusantium?
-            Reprehenderit reiciendis asperiores fuga, saepe et illo quidem facilis voluptatum corporis, qui, quisquam
-            magni esse dicta doloremque pariatur quaerat veniam cum? Aperiam, vitae facilis obcaecati, quis laborum ut
-            inventore quidem recusandae totam quam distinctio perferendis expedita porro eius deleniti. Sunt qui
-            pariatur sit fuga, nemo quia necessitatibu.</div>
-        </div>
-        <div class="right">
-          <div class="main-form">
-            <div class="title">Оставьте заявку</div>
-            <div class="subtitle">мы с Вами свяжемся!</div>
-            <form action="send.php">
-              <input type="text" name="name" placeholder="Ваше имя">
-              <input type="phone" name="phone" placeholder="Ваше телефон">
-              <input type="email" name="email" placeholder="Ваш email">
-              <input type="submit" value="Отправить">
-            </form>
-          </div>
+  <section class="intro">
+    <div class="container">
+      <div class="left">
+        <h2>Кондитерская на дому</h2>
+        <div class="text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores eveniet enim.
+          Fuga aliquid molestias quia veniam voluptatibus inventore dignissimos dolorem quisquam accusantium?
+          Reprehenderit reiciendis asperiores fuga, saepe et illo quidem facilis voluptatum corporis, qui, quisquam
+          magni esse dicta doloremque pariatur quaerat veniam cum? Aperiam, vitae facilis obcaecati, quis laborum ut
+          inventore quidem recusandae totam quam distinctio perferendis expedita porro eius deleniti. Sunt qui
+          pariatur sit fuga, nemo quia necessitatibu.
         </div>
       </div>
-    </section>
+      <div class="right">
+        <div class="main-form">
+          <div class="title">{{isSubmit?'Заявка принята':'Оставьте заявку'}}</div>
+          <div class="subtitle">{{isSubmit?'Мы с Вами свяжемся':'Заполните поля'}}</div>
+          <form v-if="!isSubmit" action="#" @submit.prevent="submit">
+            <input v-model="name" type="text" name="name" placeholder="Ваше имя" />
+            <input v-model="phone" type="phone" name="phone" placeholder="Ваше телефон" />
+            <input v-model="email" type="email" name="email" placeholder="Ваш email" />
+            <input type="submit" value="Отправить" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      isSubmit: false,
+      name: '',
+      phone: '',
+      email: ''
+    }
+  },
+  methods: {
+    submit() {
+      let info = {
+        source: 'Главная',
+        name: this.name,
+        phone: this.phone,
+        email: this.email
+      }
+      fetch("../php/send.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8"
+          },
+          body: JSON.stringify(info)
+        })
+          .then(response => response.text())
+          .then(answer => {
+            console.log(answer)
+            if(answer == 'OK') {
+              this.isSubmit = true
+              this.name = this.phone = this.email = "";
+              setTimeout(() => this.isSubmit = false, 2000)
+            }
+          });
+    }
+  }
+}
+</script>
 <style lang="less" scoped>
-@import '../style/variables.less';
-main {
+@import "../style/variables.less";
   .intro {
-    background: linear-gradient(
-      rgba(0, 0, 0, 0.7), 
-      rgba(0, 0, 0, 0.7)
-    ), url(../img/bg1.jpg);
-    background-size  : cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url(../img/bg1.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
-    min-height       : 800px;
+    min-height: 800px;
     @media (max-width: @phone) {
-       background-position: 50%;
+      background-position: 50%;
     }
     .container {
       display: flex;
@@ -47,14 +83,14 @@ main {
       padding-top: 50px;
       .left,
       .right {
-        width  : 50%;
+        width: 50%;
         padding: 20px;
         @media (max-width: @phone) {
           width: 100%;
           padding: 0;
         }
       }
-      
+
       .left {
         color: #fff;
 
@@ -65,7 +101,7 @@ main {
         }
 
         .text {
-          font-size  : 18px;
+          font-size: 18px;
           line-height: 150%;
         }
         @media (max-width: @phone) {
@@ -74,20 +110,20 @@ main {
       }
 
       .right {
-        display        : flex;
+        display: flex;
         justify-content: center;
 
         .main-form {
           background-color: @braun;
-          padding         : 20px;
-          width           : 330px;
-          text-align      : center;
-          color           : #fff;
+          padding: 20px;
+          width: 330px;
+          text-align: center;
+          color: #fff;
           @media (max-width: @phone) {
             width: 100%;
           }
           .title {
-            font-size     : 24px;
+            font-size: 24px;
             text-transform: uppercase;
           }
 
@@ -96,29 +132,29 @@ main {
           }
 
           form {
-            margin        : 0 auto;
-            display       : flex;
+            margin: 0 auto;
+            display: flex;
             flex-direction: column;
-            width         : 80%;
+            width: 80%;
 
             input {
-              font-size    : 18px;
-              height       : 30px;
+              font-size: 18px;
+              height: 30px;
               margin-bottom: 20px;
               padding-left: 10px;
             }
 
             [type="submit"] {
               background-color: @orange;
-              border          : none;
-              cursor          : pointer;
-              outline         : none;
-              color           : #fff;
-              border-radius   : 10px;
-              height          : auto;
-              padding         : 10px 0;
+              border: none;
+              cursor: pointer;
+              outline: none;
+              color: #fff;
+              border-radius: 10px;
+              height: auto;
+              padding: 10px 0;
               &:hover {
-                background:darken(@orange, 5%);
+                background: darken(@orange, 5%);
               }
               &:active {
                 transform: scale(0.99);
@@ -129,5 +165,4 @@ main {
       }
     }
   }
-}
 </style>

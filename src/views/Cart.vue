@@ -18,7 +18,7 @@
           <span>руб.</span>
         </div>
         <div class="ps">*Детали обсуждаются при уточнении заказа</div>
-        <button class="cart-order">Оформить</button>
+        <button class="cart-order" @click="$emit('cartOrder')">Оформить</button>
       </div>
     </div>
     <div class="nothing" v-else>Вы еще ничего не выбрали</div>

@@ -26,13 +26,20 @@
           </address>
         </div>
         <div class="contact-form">
-          <div class="title">Оставьте заявку</div>
-          <div class="subtitle">мы с Вами свяжемся!</div>
-          <form action="send.php">
-            <input type="text" name="name" placeholder="Ваше имя" />
-            <input type="phone" name="phone" placeholder="Ваше телефон" />
-            <input type="email" name="email" placeholder="Ваш email" />
-            <textarea name="text" cols="30" rows="10" placeholder="Ваше сообщение"></textarea>
+          <div class="title">{{isSubmit?'Заявка принята':'Оставьте заявку'}}</div>
+          <div class="subtitle">{{isSubmit?'Мы с Вами свяжемся':'Заполните поля'}}</div>
+          <form v-if="!isSubmit" action="#" @submit.prevent="submit">
+            <input v-model="name" type="text" name="name" placeholder="Ваше имя" required />
+            <input v-model="phone" type="phone" name="phone" placeholder="Ваше телефон" required />
+            <input v-model="email" type="email" name="email" placeholder="Ваш email" />
+            <textarea
+              v-model="message"
+              name="text"
+              cols="30"
+              rows="10"
+              placeholder="Ваше сообщение"
+              required
+            ></textarea>
             <input type="submit" value="Отправить" />
           </form>
         </div>
@@ -44,14 +51,50 @@
 <script>
 export default {
   props: ["contacts"],
+  data() {
+    return {
+      isSubmit: false,
+      name: "",
+      phone: "",
+      email: "",
+      message: ""
+    };
+  },
   computed: {
-    mapWidth () {
-      if (document.documentElement.clientWidth > 768) return 550
-      else return document.documentElement.clientWidth
+    mapWidth() {
+      if (document.documentElement.clientWidth > 768) return 550;
+      else return document.documentElement.clientWidth;
     },
     mapHeight() {
-      if (document.documentElement.clientWidth > 768) return 400
-      else return 250
+      if (document.documentElement.clientWidth > 768) return 400;
+      else return 250;
+    }
+  },
+  methods: {
+    submit() {
+      let info = {
+        source: "Контакты",
+        name: this.name,
+        phone: this.phone,
+        email: this.email,
+        message: this.message
+      };
+      fetch("../php/send.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify(info)
+      })
+        .then(response => response.text())
+        .then(answer => {
+          console.log(answer)
+          if (answer == "OK") {
+            this.isSubmit = true;
+            this.name = this.phone = this.email = this.message = "";
+            setTimeout(() => (this.isSubmit = false), 2000);
+          }
+        });
     }
   }
 };
@@ -63,6 +106,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
   iframe {
     @media (max-width: @phone) {
       padding: 0 10px;

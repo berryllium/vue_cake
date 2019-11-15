@@ -26,6 +26,10 @@ export default {
     },
     setCart(state) {
       state.cart = JSON.parse(state.jsonCart)
+    },
+    clearCart(state) {
+      state.cart = []
+      state.jsonCart=JSON.stringify(state.cart)
     }
   },
   state: {

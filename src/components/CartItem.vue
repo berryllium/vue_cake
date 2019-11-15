@@ -5,9 +5,9 @@
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/кг</div>
       <div class="counter">
-        <button class="plus-btn" @click="add">+</button>
-        <div class="count-item">{{this.item.count}} кг.</div>
         <button class="minus-btn" @click="sub">-</button>
+        <div class="count-item">{{this.item.count}} кг.</div>
+        <button class="plus-btn" @click="add">+</button>
       </div>
     </div>
   </div>
