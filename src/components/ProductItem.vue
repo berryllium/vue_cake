@@ -46,6 +46,9 @@ export default {
 @import "../style/variables.less";
 .product-item {
   width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   img {
     width: 350px;
     height: 250px;
