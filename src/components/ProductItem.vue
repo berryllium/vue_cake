@@ -60,6 +60,9 @@ export default {
   .info {
     padding: 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .name {
       text-transform: uppercase;
       font-size: 18px;
