@@ -34,7 +34,7 @@ export default {
           email: this.email
         };
         let res = [info,this.allCart]
-        fetch("../php/send.php", {
+        fetch("php/send.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json;charset=utf-8"
