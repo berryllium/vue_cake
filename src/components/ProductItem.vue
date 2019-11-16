@@ -5,12 +5,12 @@
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/кг</div>
       <div class="desc">{{this.item.desc}}</div>
+    </div>
       <button
         class="buy"
         @click="buy"
         :class="{added: this.isAdded}"
       >{{this.isAdded ? "В корзине" : "В корзину"}}</button>
-    </div>
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   img {
     width: 350px;
     height: 250px;
@@ -58,11 +59,11 @@ export default {
     }
   }
   .info {
-    padding: 20px;
+    padding-top: 20px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    flex: 1;
     .name {
       text-transform: uppercase;
       font-size: 18px;
@@ -75,7 +76,9 @@ export default {
     }
     .desc {
       margin-bottom: 10px;
+      text-align: center;
     }
+  }
     .buy {
       width: 150px;
       height: 30px;
@@ -95,7 +98,6 @@ export default {
         background-color: @orange;
       }
     }
-  }
   @media (max-width: @phone) {
     width: 300px;
     margin: 0 auto;
