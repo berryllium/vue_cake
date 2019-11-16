@@ -4,7 +4,7 @@
     <div class="info">
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/кг</div>
-      <div class="desc">Описание</div>
+      <div class="desc">{{this.item.desc}}</div>
       <button
         class="buy"
         @click="buy"
