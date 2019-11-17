@@ -25,6 +25,7 @@ if(!$_SESSION['admin']){
   </header>
   <main class="container">
       <a href="login.php?exit=exit">Выход</a>
+      <a href="contacts.php">Мои контакты</a>
     <div class="form col-md-6 col-12">
       <form action="upload.php" method="POST" enctype="multipart/form-data" class="flex columns">
         <input type="text" name="title" id="title" placeholder="Название" required>
