@@ -27,7 +27,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     'path_small' => $row['path_small'],
   ];
 }
-print_r($arr);
 if (!$arr) header("Location: " . PATH_ROOT . "/admin/index.php");
 extract($arr);
 ?>
