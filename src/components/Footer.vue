@@ -13,7 +13,7 @@
         </p>
         <p>
           Пишите:
-          <a href="mailto: test@yandex.ru">test@yandex.ru</a>
+          <a :href="'mailto: ' + contacts.email">{{contacts.email}}</a>
         </p>
       </div>
       <div class="footer-item">

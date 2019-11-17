@@ -9,10 +9,11 @@ while ($row = mysqli_fetch_assoc($result)) {
   $object->id = (int)$row['id'];
   $object->name = $row['title'];
   $object->desc = $row['description'];
-  // $object->category = $row['category'];
+  $object->category = $row['category'];
   $object->price = (int)$row['price'];
-  $object->img = $row['path_big'];
-  // $object->img_small = $row['path_small'];
+  $object->units = $row['units'];
+  $object->img = $row['path_small'];
+  $object->img_big = $row['path_big'];
   $data[] = $object;
 }
 // print_r($data);

@@ -33,19 +33,20 @@
       }
 
       // вывод товаров из базы
-      // if(!$arr_photo) die ('нет файлов');
-      foreach ($arr_photo as $key => $item) : ?>
-        <div class="item col-md-4 col-sm-6 col-12">
-          <a class="example-image-link" href="<?= PATH_ROOT . $item['path_big'] ?>" data-lightbox="example-set">
-            <img class="example-image" src="<?= PATH_ROOT . $item['path_small'] ?>" alt="<?= $item['title'] ?>" />
-          </a>
-          <div><b>Название </b><?= $item['title'] ?></div>
-          <div><b>Категория </b><?= $item['category'] ?></div>
-          <div><b>Описание </b><?= $item['description'] ?></div>
-          <div><b>Цена  </b><?= $item['price'] ?></div>
-        </div>
-      <?php endforeach; ?>
-
+      if ($arr_photo) :
+        foreach ($arr_photo as $key => $item) : ?>
+          <div class="item col-md-4 col-sm-6 col-12">
+            <a class="example-image-link" href="<?= PATH_ROOT . $item['path_big'] ?>" data-lightbox="example-set">
+              <img class="example-image" src="<?= PATH_ROOT . $item['path_small'] ?>" alt="<?= $item['title'] ?>" />
+            </a>
+            <div><b>Название </b><?= $item['title'] ?></div>
+            <div><b>Категория </b><?= $item['category'] ?></div>
+            <div><b>Описание </b><?= $item['description'] ?></div>
+            <div><b>Цена </b><?= $item['price'] ?></div>
+          </div>
+      <?php endforeach;
+      else : echo '<h3 class="col">добавьте товары</h3>';
+      endif; ?>
     </div>
     <div class="form col-md-6 col-12">
       <form action="upload.php" method="POST" enctype="multipart/form-data" class="flex columns">
@@ -56,13 +57,20 @@
           <option value="панкейк">панкейк</option>
         </select>
         <input type="number" name="price" id="price" placeholder="Цена" required>
+        <select name="units" id="units" required>
+          <option value="шт.">шт.</option>
+          <option value="набор">набор</option>
+          <option value="кг.">кг.</option>
+          <option value="100 г.">100 г.</option>
+        </select>
         <textarea type="text" name="desc" id="decs" placeholder="Описание" required></textarea>
         <input type="file" name="photo" id="photo" accept="image/jpeg" required>
-        <input type="submit" value="Добавить товар">  
+        <input type="submit" value="Добавить товар">
       </form>
     </div>
     </div>
   </main>
+  <script src="jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 

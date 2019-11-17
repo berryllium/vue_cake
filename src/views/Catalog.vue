@@ -12,6 +12,7 @@
 import PruductItem from '@/components/ProductItem'
 import Loader from '@/components/Loader'
 import {mapMutations, mapActions, mapGetters} from 'vuex'
+
 export default {
   props: ['products', 'loading'],
   methods: {

@@ -3,10 +3,10 @@
     <img :src="this.item.img" alt="photo" />
     <div class="info">
       <div class="name">{{this.item.name}}</div>
-      <div class="price">{{this.item.price}} руб/кг</div>
+      <div class="price">{{this.item.price}} руб/{{this.item.units}}</div>
       <div class="counter">
         <button class="minus-btn" @click="sub">-</button>
-        <div class="count-item">{{this.item.count}} кг.</div>
+        <div class="count-item">{{this.item.count}}</div>
         <button class="plus-btn" @click="add">+</button>
       </div>
     </div>
@@ -73,7 +73,7 @@ export default {
   .name {
     font-size: 24px;
     font-weight: bold;
-    width: 35%;
+    width: 25%;
   }
   .counter {
     display: flex;
@@ -110,7 +110,7 @@ export default {
     font-weight: bold;
     font-style: italic;
     font-size: 18px;
-    width: 20%;
+    width: 30%;
   }
 }
 </style>
