@@ -3,7 +3,7 @@
 function sendMail($sub, $message)
 {
   $address = "gorkundp@yandex.ru";
-  $email = 'australia@freestuff47.ru'; // от кого
+  $email = 'info.тортик-надо.рф'; // от кого
   $header = "Content-type:text/plain; charset = utf-8\r\nFrom:Заказ тортиков <$email>";
   if(mail($address, $sub, $message, $header)) return true;
 }

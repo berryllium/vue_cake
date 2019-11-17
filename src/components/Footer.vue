@@ -3,7 +3,7 @@
     <div class="container">
       <div class="footer-item">
         <h3>Время работы</h3>
-        <p>Работаем каждый день с 9.00 до 21.00</p>
+        <p>{{contacts.work}}</p>
       </div>
       <div class="footer-item">
         <h3>Наши контакты</h3>

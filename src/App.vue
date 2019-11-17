@@ -1,15 +1,15 @@
 <template>
 <body>
-  <Header :contacts="contacts" :cart="allCart" />
+  <Header :contacts="allContacts" :cart="allCart" />
   <main>
     <router-view
-      :contacts="contacts"
+      :contacts="allContacts"
       :products="allCatalog"
       :loading="loadingState"
       @cartOrder="openForm"
     />
   </main>
-  <Footer :contacts="contacts" />
+  <Footer :contacts="allContacts" />
   <transition name="fade">
     <Popup
       :cart="allCart"
@@ -46,10 +46,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allCatalog", "loadingState", "allCart", "getJsonCart"])
+    ...mapGetters([
+      "allContacts",
+      "allCatalog",
+      "loadingState",
+      "allCart",
+      "getJsonCart"
+    ])
   },
   methods: {
-    ...mapActions(["fetchCatalog"]),
+    ...mapActions(["fetchCatalog", "fetchContacts"]),
     ...mapMutations(["clearCart"]),
     openForm() {
       this.popupVisible = true;
@@ -70,11 +76,12 @@ export default {
     }
   },
   mounted() {
+    this.fetchCatalog();
+    this.fetchContacts();
     var $ = require("jquery");
     window.jQuery = $;
     require("@fancyapps/fancybox");
     this.$store.commit("setCart");
-    this.fetchCatalog();
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
       e.preventDefault();
