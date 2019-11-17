@@ -1,8 +1,13 @@
 <?php
+require_once('../admin/connection.php');
 
-function sendMail($sub, $message)
+$query = 'SELECT `email` FROM contacts WHERE `contacts`.`id` = 1';
+$result = mysqli_query($connection, $query);
+$row = mysqli_fetch_row($result);
+$address =  $row[0];
+
+function sendMail($sub, $message, $address)
 {
-  $address = "gorkundp@yandex.ru";
   $email = 'info.тортик-надо.рф'; // от кого
   $header = "Content-type:text/plain; charset = utf-8\r\nFrom:Заказ тортиков <$email>";
   if(mail($address, $sub, $message, $header)) return true;
@@ -33,7 +38,7 @@ if ($source == 'Корзина') {
 
 $subj = "Тортик-надо.рф ($source)";
 
-if (sendMail($subj, $text)) {
+if (sendMail($subj, $text, $address)) {
   echo 'OK';
 }
 else echo 'Ошибка отправки формы';
