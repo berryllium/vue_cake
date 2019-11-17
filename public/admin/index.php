@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(!$_SESSION['admin']){
+ header("Location: login.php");
+ exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -15,39 +24,7 @@
     <h1>Административная панель</h1>
   </header>
   <main class="container">
-    <div class="row">
-      <?php require_once 'connection.php';
-      require_once 'functions.php';
-      $query = 'SELECT * FROM products';
-      $result = mysqli_query($connection, $query);
-      while ($row = mysqli_fetch_assoc($result)) {
-        $arr_photo[] = [
-          'id' => $row['id'],
-          'title' => $row['title'],
-          'description' => $row['description'],
-          'category' => $row['category'],
-          'price' => $row['price'],
-          'path_big' => $row['path_big'],
-          'path_small' => $row['path_small'],
-        ];
-      }
-
-      // вывод товаров из базы
-      if ($arr_photo) :
-        foreach ($arr_photo as $key => $item) : ?>
-          <div class="item col-md-4 col-sm-6 col-12">
-            <a class="example-image-link" href="<?= PATH_ROOT . $item['path_big'] ?>" data-lightbox="example-set">
-              <img class="example-image" src="<?= PATH_ROOT . $item['path_small'] ?>" alt="<?= $item['title'] ?>" />
-            </a>
-            <div><b>Название </b><?= $item['title'] ?></div>
-            <div><b>Категория </b><?= $item['category'] ?></div>
-            <div><b>Описание </b><?= $item['description'] ?></div>
-            <div><b>Цена </b><?= $item['price'] ?></div>
-          </div>
-      <?php endforeach;
-      else : echo '<h3 class="col">добавьте товары</h3>';
-      endif; ?>
-    </div>
+      <a href="login.php?exit=exit">Выход</a>
     <div class="form col-md-6 col-12">
       <form action="upload.php" method="POST" enctype="multipart/form-data" class="flex columns">
         <input type="text" name="title" id="title" placeholder="Название" required>
@@ -57,7 +34,7 @@
           <option value="панкейк">панкейк</option>
         </select>
         <input type="number" name="price" id="price" placeholder="Цена" required>
-        <select name="units" id="units" required>
+        <select name="units" id="units" placeholder="Единицы" required>
           <option value="шт.">шт.</option>
           <option value="набор">набор</option>
           <option value="кг.">кг.</option>
@@ -68,6 +45,62 @@
         <input type="submit" value="Добавить товар">
       </form>
     </div>
+    <table class="col-12">
+      <tr>
+        <th>Фото</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Описание</th>
+        <th>Цена</th>
+        <th>Единицы</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
+      </tr>
+      <?php require_once 'connection.php';
+      require_once 'functions.php';
+
+      if (isset($_GET['id'])) {
+        $single = $_GET['id'];
+        $query = "SELECT * FROM products WHERE id = '$single'";
+        $action = "edit";
+      } else {
+        $query = 'SELECT * FROM products';
+        $action = "create";
+      }
+
+      $result = mysqli_query($connection, $query);
+      while ($row = mysqli_fetch_assoc($result)) {
+        $arr_photo[] = [
+          'id' => $row['id'],
+          'title' => $row['title'],
+          'description' => $row['description'],
+          'category' => $row['category'],
+          'price' => $row['price'],
+          'units' => $row['units'],
+          'path_big' => $row['path_big'],
+          'path_small' => $row['path_small'],
+        ];
+      }
+
+      // вывод товаров из базы
+      if ($arr_photo) :
+        foreach ($arr_photo as $key => $item) : ?>
+          <tr>
+            <td> <img class="example-image" src="<?= PATH_ROOT . $item['path_small'] ?>" alt="<?= $item['title'] ?>" /> </td>
+            <td> <?= $item['title'] ?> </td>
+            <td><?= $item['category'] ?> </td>
+            <td> <?= $item['description'] ?> </td>
+            <td> <?= $item['price'] ?> </td>
+            <td> <?= $item['units'] ?> </td>
+            <td> <a class="edit-link" href="<?= 'single.php?id=' . $item['id'] ?>" target="_blank">Редактировать</a></td>
+            <td> <a class="delete-link" href="<?= 'upload.php?delete=&id=' . $item['id'] . '&small=' . $item['path_small'] . '&big=' . $item['path_big']?>" target="_blank">&times;</a></td>
+
+          </tr>
+      <?php endforeach;
+      else : echo '<h3 class="col">добавьте товары</h3>';
+      endif; ?>
+    </table>
+
     </div>
   </main>
   <script src="jquery-3.4.1.min.js"></script>
