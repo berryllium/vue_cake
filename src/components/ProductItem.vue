@@ -1,6 +1,6 @@
 <template>
   <div class="product-item">
-    <a :href="this.item.img_big" data-fancybox data-caption="Caption for single image"><img :src="this.item.img" alt="photo" /></a>
+    <a :href="this.item.img_big" data-fancybox :data-caption="this.item.name"><img :src="this.item.img" alt="photo" /></a>
     <div class="info">
       <div class="name">{{this.item.name}}</div>
       <div class="price">{{this.item.price}} руб/{{this.item.units}}</div>

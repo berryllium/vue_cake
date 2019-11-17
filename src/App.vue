@@ -38,11 +38,7 @@ export default {
   data() {
     return {
       popupVisible: false,
-      div: true,
-      contacts: {
-        phone: "+7(965)539-12-99",
-        email: "info@тортик-надо.рф"
-      }
+      div: true
     };
   },
   computed: {
