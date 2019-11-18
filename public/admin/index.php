@@ -72,7 +72,7 @@ $arr_products = getProducts($connection, $query);
 
       </tr>
   <?php endforeach;
-  else : echo '<h3 class="col">добавьте товары</h3>';
+  else : echo '<h3 class="col-12">добавьте товары</h3>';
   endif; ?>
 </table>
 
