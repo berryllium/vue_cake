@@ -3,7 +3,7 @@
     <div class="container">
       <div class="left">
         <h2>{{contacts.header}}</h2>
-        <div class="text">{{contacts.hometext}}</div>
+        <div class="page-text-content" v-html="contacts.delivery"></div>
       </div>
       <div class="right">
         <div class="main-form">
@@ -92,11 +92,6 @@ export default {
         margin-top: 0;
         margin-bottom: 30px;
         text-transform: uppercase;
-      }
-
-      .text {
-        font-size: 18px;
-        line-height: 150%;
       }
       @media (max-width: @phone) {
         padding: 10px;
