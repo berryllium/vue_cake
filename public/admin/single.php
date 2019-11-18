@@ -14,7 +14,7 @@ $allUnits = getallUnits($connection);
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "SELECT * FROM products WHERE product.id = '$id' INNER JOIN categories ON products.category_id = categories.id_cat INNER JOIN units ON products.units_id= units.id_units";
+  $query = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id_cat INNER JOIN units ON products.units_id = units.id_units WHERE id = '$id'";
 } else header("Location: " . PATH_ROOT . "/admin/index.php");
 
 $result = mysqli_query($connection, $query);
