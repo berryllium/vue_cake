@@ -10,10 +10,11 @@ require_once 'connection.php';
 require_once 'functions.php';
 
 $allCategories = getAllCategories($connection);
+$allUnits = getallUnits($connection);
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $query = "SELECT * FROM products WHERE id = '$id'";
+  $query = "SELECT * FROM products WHERE product.id = '$id' INNER JOIN categories ON products.category_id = categories.id_cat INNER JOIN units ON products.units_id= units.id_units";
 } else header("Location: " . PATH_ROOT . "/admin/index.php");
 
 $result = mysqli_query($connection, $query);
@@ -23,8 +24,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     'title' => $row['title'],
     'description' => $row['description'],
     'category' => $row['category'],
+    'category_id' => $row['category'],
     'price' => $row['price'],
     'units' => $row['units'],
+    'units_id' => $row['units_id'],
     'path_big' => $row['path_big'],
     'path_small' => $row['path_small'],
   ];
@@ -40,14 +43,13 @@ extract($arr);
     <input type="text" name="title" id="title" placeholder="Название" value="<?= $title ?>" required>
     <select name="category" id="category" required>
       <?php foreach($allCategories as $el => $value):?>
-        <option value="<?= $value['id_cat'] ?>"><?= $value['category'] ?></option>
+        <option value="<?= $value['id_cat'] ?>" <?= $value['id_cat'] == $category_id ? 'selected' : '' ?>><?= $value['category'] ?></option>
       <?php endforeach; ?>
     <input type="number" name="price" id="price" placeholder="Цена" value="<?= $price ?>" required>
     <select name="units" id="units" placeholder="Единицы" value="<?= $units ?>" required>
-      <option value="шт." <?= $category == 'шт.' ? 'selected' : '' ?>>шт.</option>
-      <option value="набор" <?= $category == 'набор' ? 'selected' : '' ?>>набор</option>
-      <option value="кг." <?= $category == 'кг.' ? 'selected' : '' ?>>кг.</option>
-      <option value="100 г." <?= $category == '100 г.' ? 'selected' : '' ?>>100 г.</option>
+      <?php foreach($allUnits as $el => $value):?>
+        <option value="<?= $value['id_units'] ?>" <?= $value['id_units'] == $units_id ? 'selected' : '' ?>><?= $value['units'] ?></option>
+      <?php endforeach; ?>
     </select>
     <textarea type="text" name="desc" id="decs" placeholder="Описание" required><?= $description ?></textarea>
     <input type="file" name="photo" id="photo" accept="image/jpeg">
