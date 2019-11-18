@@ -11,6 +11,8 @@ if (isset($_GET['contacts'])) {
     $object->phone = $row['phone'];
     $object->email = $row['email'];
     $object->address = $row['address'];
+    $object->header = $row['header'];
+    $object->hometext = $row['hometext'];
     $object->work = $row['work'];
     $object->about = $row['about'];
     $object->delivery = $row['delivery'];

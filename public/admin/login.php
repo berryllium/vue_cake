@@ -24,13 +24,26 @@ if ($_POST['submit']) {
 
 
 ?>
-<div class="login-form">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Вход в админку</title>
+</head>
+<body>
+  <div class="login-form">
   <form method="post">
-    Username: <input type="text" name="user" /><br />
-    Password: <input type="password" name="pass" /><br />
+    <label for="user">Логин: </label><input type="text" name="user" id="user"/><br />
+    <label for="user">Пароль: </label><input type="password" name="pass" id="pass"/><br />
     <input type="submit" name="submit" value="Войти" />
   </form>
 </div>
+</body>
+</html>
+
 
 <style>
   .login-form {
