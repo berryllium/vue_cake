@@ -91,11 +91,10 @@ export default {
   flex-wrap: wrap;
   justify-content: flex-start;
   .product-category {
-    font-size: 1.2em;
     font-weight: bold;
     font-style: italic;
     text-transform: capitalize;
-    padding: 10px 20px;
+    padding: 5px 10px;
     margin-right: 20px;
     border-radius: 20px;
     border: 2px solid transparent;
