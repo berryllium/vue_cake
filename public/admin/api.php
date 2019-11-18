@@ -10,6 +10,9 @@ if (isset($_GET['contacts'])) {
     $object = new stdClass();
     $object->phone = $row['phone'];
     $object->email = $row['email'];
+    $object->vk = $row['vk'];
+    $object->ok = $row['ok'];
+    $object->inst = $row['inst'];
     $object->address = $row['address'];
     $object->header = $row['header'];
     $object->hometext = $row['hometext'];

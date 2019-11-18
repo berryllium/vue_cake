@@ -19,14 +19,14 @@
       <div class="footer-item">
         <h3>Мы в соцсетях</h3>
         <div class="social-links">
-          <a href="#">
-            <i class="fa fa-vk" aria-hidden="true"></i>
+          <a v-if="contacts.vk" :href="contacts.vk">
+            <i class="fa fa-vk" aria-hidden="true" target="_blank"></i>
           </a>
-          <a href="#">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
+          <a v-if="contacts.inst" :href="contacts.inst">
+            <i class="fa fa-instagram" aria-hidden="true" target="_blank"></i>
           </a>
-          <a href="#">
-            <i class="fa fa-odnoklassniki" aria-hidden="true"></i>
+          <a v-if="contacts.ok" :href="contacts.ok">
+            <i class="fa fa-odnoklassniki" aria-hidden="true" target="_blank"></i>
           </a>
         </div>
       </div>

@@ -23,6 +23,9 @@ while ($row = mysqli_fetch_assoc($result)) {
   $phone = $row['phone'];
   $email = $row['email'];
   $address = $row['address'];
+  $vk = $row['vk'];
+  $ok = $row['ok'];
+  $inst = $row['inst'];
   $work = $row['work'];
   $header = $row['header'];
   $hometext = $row['hometext'];
@@ -37,6 +40,9 @@ while ($row = mysqli_fetch_assoc($result)) {
   <form method="post" class="flex columns">
     <input type="phone" name="phone" id="phone" placeholder="Телефон" value="<?= $phone ?>" required>
     <input type="email" name="email" id="email" placeholder="Email" value="<?= $email ?>" required>
+    <input type="text" name="vk" id="vk" placeholder="Вконтакте" value="<?= $vk ?>" required>
+    <input type="text" name="ok" id="ok" placeholder="Одноклассники" value="<?= $ok ?>" required>
+    <input type="text" name="inst" id="inst" placeholder="Инстаграм" value="<?= $inst ?>" required>
     <input type="text" name="address" id="address" placeholder="Адрес" value="<?= $address ?>" required>
     <input type="text" name="work" id="work" placeholder="Режим работы" value="<?= $work ?>" required>
     <input type="text" name="header" id="header" placeholder="Заголовок на главной" value="<?= $header ?>" required>
