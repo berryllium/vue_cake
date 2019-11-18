@@ -9,6 +9,7 @@ if (!$_SESSION['admin']) {
 require_once 'connection.php';
 require_once 'functions.php';
 
+$allCategories = getAllCategories($connection);
 if (isset($_GET['id'])) {
   $single = $_GET['id'];
   $query = "SELECT * FROM products WHERE id = '$single'";
@@ -17,20 +18,9 @@ if (isset($_GET['id'])) {
   $query = 'SELECT * FROM products';
   $action = "create";
 }
+$query.=' INNER JOIN categories ON products.category_id = categories.id_cat';
+$arr_products = getProducts($connection, $query);
 
-$result = mysqli_query($connection, $query);
-while ($row = mysqli_fetch_assoc($result)) {
-  $arr_photo[] = [
-    'id' => $row['id'],
-    'title' => $row['title'],
-    'description' => $row['description'],
-    'category' => $row['category'],
-    'price' => $row['price'],
-    'units' => $row['units'],
-    'path_big' => $row['path_big'],
-    'path_small' => $row['path_small'],
-  ];
-}
 
 ?>
 
@@ -39,9 +29,9 @@ while ($row = mysqli_fetch_assoc($result)) {
   <form action="upload.php" method="POST" enctype="multipart/form-data" class="flex columns">
     <input type="text" name="title" id="title" placeholder="Название" required>
     <select name="category" id="category" required>
-      <option value="торт">торт</option>
-      <option value="пирожное">пирожное</option>
-      <option value="панкейк">панкейк</option>
+      <?php foreach($allCategories as $el => $value):?>
+        <option value="<?= $value['id_cat'] ?>"><?= $value['category'] ?></option>
+      <?php endforeach; ?>
     </select>
     <input type="number" name="price" id="price" placeholder="Цена" required>
     <select name="units" id="units" placeholder="Единицы" required>
@@ -68,8 +58,8 @@ while ($row = mysqli_fetch_assoc($result)) {
   </tr>
   <?php
   // вывод товаров из базы
-  if ($arr_photo) :
-    foreach ($arr_photo as $key => $item) : ?>
+  if ($arr_products) :
+    foreach ($arr_products as $key => $item) : ?>
       <tr>
         <td> <img class="example-image" src="<?= PATH_ROOT . $item['path_small'] ?>" alt="<?= $item['title'] ?>" /> </td>
         <td> <?= $item['title'] ?> </td>

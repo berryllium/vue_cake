@@ -1,6 +1,68 @@
 <?php
+session_start();
+
+if (!$_SESSION['admin']) {
+  header("Location: login.php");
+  exit;
+}
 
 define('PATH_ROOT', '..');
+
+require_once('connection.php');
+
+//вывод всех категорий 
+function getAllCategories($connection)
+{
+  $query = 'SELECT * FROM categories';
+  $result = mysqli_query($connection, $query);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $allCategories[] = [
+      'id_cat' => $row['id_cat'],
+      'category' => $row['category'],
+    ];
+  }
+  return $allCategories;
+}
+
+//вывод всех продуктов
+
+function getAllProducts($connection)
+{
+  $query = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id_cat_cat";
+  $result = mysqli_query($connection, $query);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $arr_products[] = [
+      'id' => $row['id'],
+      'title' => $row['title'],
+      'description' => $row['description'],
+      'category' => $row['category'],
+      'price' => $row['price'],
+      'units' => $row['units'],
+      'path_big' => $row['path_big'],
+      'path_small' => $row['path_small'],
+    ];
+  }
+  return $arr_products;
+}
+
+function getProducts($connection, $query)
+{
+  $result = mysqli_query($connection, $query);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $arr_products[] = [
+      'id' => $row['id'],
+      'title' => $row['title'],
+      'description' => $row['description'],
+      'category' => $row['category'],
+      'price' => $row['price'],
+      'units' => $row['units'],
+      'path_big' => $row['path_big'],
+      'path_small' => $row['path_small'],
+    ];
+  }
+  return $arr_products;
+}
+
 
 // отправка писем
 function sendMail($sub, $message)
@@ -8,7 +70,7 @@ function sendMail($sub, $message)
   $address = "gorkundp@yandex.ru";
   $email = 'australia@freestuff47.ru'; // от кого
   $header = "Content-type:text/plain; charset = utf-8\r\nFrom:Заказ тортиков <$email>";
-  if(mail($address, $sub, $message, $header)) return true;
+  if (mail($address, $sub, $message, $header)) return true;
 }
 
 
@@ -29,21 +91,21 @@ function translit($str)
   $result = implode($result);
   return $result;
 }
+// создание уменьшенной копии
+function imageresize($outfile, $infile, $neww, $newh, $quality)
+{
+  $im = imagecreatefromjpeg($infile);
+  $k1 = $neww / imagesx($im);
+  $k2 = $newh / imagesy($im);
+  $k = $k1 > $k2 ? $k2 : $k1;
 
-function imageresize($outfile,$infile,$neww,$newh,$quality) {
-    $im=imagecreatefromjpeg($infile);
-    $k1=$neww/imagesx($im);
-    $k2=$newh/imagesy($im);
-    $k=$k1>$k2?$k2:$k1;
+  $w = intval(imagesx($im) * $k);
+  $h = intval(imagesy($im) * $k);
 
-    $w=intval(imagesx($im)*$k);
-    $h=intval(imagesy($im)*$k);
+  $im1 = imagecreatetruecolor($w, $h);
+  imagecopyresampled($im1, $im, 0, 0, 0, 0, $w, $h, imagesx($im), imagesy($im));
 
-    $im1=imagecreatetruecolor($w,$h);
-    imagecopyresampled($im1,$im,0,0,0,0,$w,$h,imagesx($im),imagesy($im));
-
-    imagejpeg($im1,$outfile,$quality);
-    imagedestroy($im);
-    imagedestroy($im1);
-    }
-
+  imagejpeg($im1, $outfile, $quality);
+  imagedestroy($im);
+  imagedestroy($im1);
+}

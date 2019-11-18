@@ -23,9 +23,9 @@ if (isset($_GET['contacts'])) {
 } else {
   if (isset($_GET['category']))  {
   $category = $_GET['category'];
-  $query = "SELECT * FROM products WHERE `category` = '$category';";
+  $query = "SELECT * FROM products WHERE `category` = '$category' INNER JOIN categories ON products.category_id = categories.id_cat;";
   }
-  else $query = 'SELECT * FROM products;';
+  else $query = 'SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id_cat;';
   $result = mysqli_query($connection, $query);
   while ($row = mysqli_fetch_assoc($result)) {
     $object = new stdClass();

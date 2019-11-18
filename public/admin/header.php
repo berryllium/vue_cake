@@ -18,5 +18,6 @@
       <div class="col-12">
         <a class="menu-link" href="login.php?exit=exit">Выход</a>
         <a class="menu-link" href="index.php">Каталог</a>
+        <a class="menu-link" href="categories.php">Категории товаров</a>
         <a class="menu-link" href="contacts.php">Мои контакты</a>
       </div>

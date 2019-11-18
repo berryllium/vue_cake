@@ -5,9 +5,11 @@ if (!$_SESSION['admin']) {
   header("Location: login.php");
   exit;
 }
-?>
-<?php require_once 'connection.php';
+
+require_once 'connection.php';
 require_once 'functions.php';
+
+$allCategories = getAllCategories($connection);
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
@@ -37,10 +39,9 @@ extract($arr);
     <input hidden name="id" value=<?= $id ?>>
     <input type="text" name="title" id="title" placeholder="Название" value="<?= $title ?>" required>
     <select name="category" id="category" required>
-      <option value="торт" <?= $category == 'торт' ? 'selected' : '' ?>>торт</option>
-      <option value="пирожное" <?= $category == 'пирожное' ? 'selected' : '' ?>>пирожное</option>
-      <option value="панкейк" <?= $category == 'панкейк' ? 'selected' : '' ?>>панкейк</option>
-    </select>
+      <?php foreach($allCategories as $el => $value):?>
+        <option value="<?= $value['id_cat'] ?>"><?= $value['category'] ?></option>
+      <?php endforeach; ?>
     <input type="number" name="price" id="price" placeholder="Цена" value="<?= $price ?>" required>
     <select name="units" id="units" placeholder="Единицы" value="<?= $units ?>" required>
       <option value="шт." <?= $category == 'шт.' ? 'selected' : '' ?>>шт.</option>
