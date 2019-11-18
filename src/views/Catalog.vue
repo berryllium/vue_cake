@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <h1>Наш ассортимент</h1>
-    <div class="category">
+    <div v-if="!isMobile" class="category">
       <div
         class="product-category"
         :class="currentCategory == 'all'?'active-category':''"
@@ -15,6 +15,18 @@
         @click="filter(category)"
       >{{category}}</div>
     </div>
+    <select v-else v-model="currentCategory" class="category-mob" @change="filter(currentCategory)">
+      <option
+        class="product-category-mob"
+        value="all"
+      >Все категории</option>
+      <option
+        :value="category"
+        class="product-category-mob"
+        v-for="category in this.allCategories"
+        :key="category"
+      >{{category}}</option>
+    </select>
     <div class="products">
       <loader v-if="loading" />
       <product-item
@@ -43,6 +55,7 @@ export default {
   methods: {
     ...mapMutations(["clickBuy", "increment"]),
     filter(category) {
+      console.log(category)
       this.currentCategory = category;
     }
   },
@@ -56,6 +69,11 @@ export default {
           element => element.category == this.currentCategory
         );
       return filtered;
+    },
+    isMobile() {
+      if (document.documentElement.clientWidth < 768) {
+        return true;
+      } else return false;
     }
   },
   components: {
@@ -108,4 +126,15 @@ export default {
     gap: 15px;
   }
 }
+
+.category-mob {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  height: 30px;
+  font-size: 16px;
+  background-color: @orange;
+  color: #fff;
+}
+
 </style>
