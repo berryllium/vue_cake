@@ -45,24 +45,27 @@ INSERT INTO `categories` (`id_cat`, `category`) VALUES
 -- Структура таблицы `contacts`
 --
 
-CREATE TABLE IF NOT EXISTS `contacts` (
+CREATE TABLE `contacts` (
   `id` int(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `ok` varchar(100) NOT NULL,
+  `vk` varchar(100) NOT NULL,
+  `inst` varchar(100) NOT NULL,
   `address` varchar(150) NOT NULL,
   `header` varchar(100) NOT NULL,
   `hometext` text NOT NULL,
   `work` varchar(100) NOT NULL,
   `about` text NOT NULL,
   `delivery` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `contacts`
 --
 
-INSERT INTO `contacts` (`id`, `phone`, `email`, `address`, `header`, `hometext`, `work`, `about`, `delivery`) VALUES
-(1, '+7(965)539-12-98', 'gorkundp@yandex.ru', 'c.Натальино, ул. Революционная, д.12', 'Тортик-надо.рф', '<p>Домашняя <strong>страница</strong>', 'Работаем каждый день с 9.00 до 22.00', '<p>Информация<strong>о нас</strong>', '<p>Информация о <strong>доставке</strong>');
+INSERT INTO `contacts` (`id`, `phone`, `email`, `ok`, `vk`, `inst`, `address`, `header`, `hometext`, `work`, `about`, `delivery`) VALUES
+(1, '+7(965)539-12-98', 'gorkundp@yandex.ru', 'https://ok.ru', 'https://vk.com', 'https://www.instagram.com', 'c.Натальино, ул. Революционная, д.13', 'Тортик-надо.рф', '<p>Домашняя <strong>страница</strong>', 'Работаем каждый день с 9.00 до 22.00', '<p>О нас <strong>страница</strong>', '<p>Доставка <strong>страница</strong>');
 
 -- --------------------------------------------------------
 
