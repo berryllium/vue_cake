@@ -94,7 +94,7 @@ if(!$_SESSION['admin']){
             <td> <?= $item['price'] ?> </td>
             <td> <?= $item['units'] ?> </td>
             <td> <a class="edit-link" href="<?= 'single.php?id=' . $item['id'] ?>" target="_blank">Редактировать</a></td>
-            <td> <a class="delete-link" href="<?= 'upload.php?delete=&id=' . $item['id'] . '&small=' . $item['path_small'] . '&big=' . $item['path_big']?>" target="_blank">&times;</a></td>
+            <td> <a class="delete-link" href="<?= 'upload.php?delete=&id=' . $item['id'] . '&small=' . $item['path_small'] . '&big=' . $item['path_big']?>">&times;</a></td>
 
           </tr>
       <?php endforeach;

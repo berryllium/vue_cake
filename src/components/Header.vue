@@ -50,7 +50,7 @@ export default {
 @import "../style/variables.less";
 header {
   padding-bottom: 15px;
-  background-color: lighten(@braun, 45%);
+  background-color: lighten(@brown, 45%);
 
   .top-menu {
     position: relative;
@@ -68,7 +68,7 @@ header {
       width: 40px;
       height: 40px;
       border-radius: 20px;
-      background-color: @braun;
+      background-color: @brown;
 
       span,
       span:before,
@@ -140,7 +140,7 @@ header {
         display: none;
         position: absolute;
         z-index: 1;
-        background-color: @braun;
+        background-color: @brown;
         top: 0;
         left: 0;
         width: 100vw;
@@ -169,7 +169,7 @@ header {
           }
 
           a {
-            color: @braun;
+            color: @brown;
             font-weight: 700;
             border: none;
             text-transform: uppercase;
@@ -184,7 +184,7 @@ header {
             }
 
             &:hover {
-              border-bottom: 3px solid @braun;
+              border-bottom: 3px solid @brown;
 
               @media (max-width: @phone) {
               }
@@ -204,9 +204,9 @@ header {
       text-decoration: none;
 
       i {
-        color: @braun;
+        color: @brown;
         &:hover {
-          color: darken(@braun, 10%);
+          color: darken(@brown, 10%);
         }
       }
 

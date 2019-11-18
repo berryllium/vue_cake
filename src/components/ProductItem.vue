@@ -2,7 +2,7 @@
   <div class="product-item">
     <a :href="this.item.img_big" data-fancybox :data-caption="this.item.name"><img :src="this.item.img" alt="photo" /></a>
     <div class="info">
-      <div class="name">{{this.item.name}}</div>
+      <div class="name">{{this.item.name}} <span>({{this.item.category}})</span></div>
       <div class="price">{{this.item.price}} руб/{{this.item.units}}</div>
       <div class="desc">{{this.item.desc}}</div>
     </div>
@@ -69,6 +69,9 @@ export default {
       font-size: 18px;
       font-weight: bold;
       margin-bottom: 10px;
+      span {
+        text-transform: lowercase;
+      }
     }
     .price {
       margin-bottom: 5px;
@@ -85,11 +88,11 @@ export default {
       border: none;
       border-radius: 15px;
       outline: none;
-      background-color: @braun;
+      background-color: @brown;
       color: #fff;
       &:hover {
         cursor: pointer;
-        background-color: darken(@braun, 10%);
+        background-color: darken(@brown, 10%);
       }
       &:active {
         transform: scale(0.95);

@@ -22,6 +22,14 @@ export default {
     },
     loadingState(state) {
       return state.loading
+    },
+    allCategories(state) {
+      let categories = [];
+      state.catalog.forEach(element => {
+        categories.push(element.category);
+      });
+      categories = [...new Set(categories)];
+      return categories
     }
   }
 }

@@ -42,7 +42,7 @@ export default {
 <style lang="less" scoped>
 @import "../style/variables.less";
 footer {
-  background-color: @braun;
+  background-color: @brown;
   .container {
     display: flex;
     justify-content: space-between;

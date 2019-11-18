@@ -36,8 +36,8 @@ if ($_POST) {
     $small = PATH_ROOT . $_GET['small'];
     $big = PATH_ROOT . $_GET['big'];
     $query = "DELETE FROM `products` WHERE `products`.`id` = '$id'";
-    unlink($small);
-    unlink($big);
+    if (file_exists($small)) unlink($small);
+    if (file_exists($big)) unlink($big);
 } else echo 'Ошибка удаления';
 
 $result = mysqli_query($connection, $query);

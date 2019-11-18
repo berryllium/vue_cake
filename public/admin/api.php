@@ -19,8 +19,11 @@ if (isset($_GET['contacts'])) {
 
   echo json_encode($data, JSON_UNESCAPED_UNICODE);
 } else {
-
-  $query = 'SELECT * FROM products';
+  if (isset($_GET['category']))  {
+  $category = $_GET['category'];
+  $query = "SELECT * FROM products WHERE `category` = '$category';";
+  }
+  else $query = 'SELECT * FROM products;';
   $result = mysqli_query($connection, $query);
   while ($row = mysqli_fetch_assoc($result)) {
     $object = new stdClass();

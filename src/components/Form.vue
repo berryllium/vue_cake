@@ -63,7 +63,7 @@ export default {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  background-color: @braun;
+  background-color: @brown;
   padding: 25px;
   width: 330px;
   text-align: center;

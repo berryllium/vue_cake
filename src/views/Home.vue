@@ -114,7 +114,7 @@ export default {
         justify-content: center;
 
         .main-form {
-          background-color: @braun;
+          background-color: @brown;
           padding: 20px;
           width: 330px;
           text-align: center;

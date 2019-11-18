@@ -127,12 +127,12 @@ export default {
     }
     span,
     a {
-      color: @braun;
+      color: @brown;
       text-decoration: none;
     }
   }
   .contact-form {
-    background-color: @braun;
+    background-color: @brown;
     width: 47%;
     padding: 20px;
     text-align: center;
