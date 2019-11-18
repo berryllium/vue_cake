@@ -10,6 +10,8 @@ require_once 'connection.php';
 require_once 'functions.php';
 
 $allCategories = getAllCategories($connection);
+$allUnits = getallUnits($connection);
+
 if (isset($_GET['id'])) {
   $single = $_GET['id'];
   $query = "SELECT * FROM products WHERE id = '$single'";
@@ -18,7 +20,7 @@ if (isset($_GET['id'])) {
   $query = 'SELECT * FROM products';
   $action = "create";
 }
-$query.=' INNER JOIN categories ON products.category_id = categories.id_cat';
+$query .= ' INNER JOIN categories ON products.category_id = categories.id_cat INNER JOIN units ON products.units_id= units.id_units';
 $arr_products = getProducts($connection, $query);
 
 
@@ -29,16 +31,15 @@ $arr_products = getProducts($connection, $query);
   <form action="upload.php" method="POST" enctype="multipart/form-data" class="flex columns">
     <input type="text" name="title" id="title" placeholder="Название" required>
     <select name="category" id="category" required>
-      <?php foreach($allCategories as $el => $value):?>
+      <?php foreach ($allCategories as $el => $value) : ?>
         <option value="<?= $value['id_cat'] ?>"><?= $value['category'] ?></option>
       <?php endforeach; ?>
     </select>
     <input type="number" name="price" id="price" placeholder="Цена" required>
     <select name="units" id="units" placeholder="Единицы" required>
-      <option value="шт.">шт.</option>
-      <option value="набор">набор</option>
-      <option value="кг.">кг.</option>
-      <option value="100 г.">100 г.</option>
+      <?php foreach ($allUnits as $el => $value) : ?>
+        <option value="<?= $value['id_units'] ?>"><?= $value['units'] ?></option>
+      <?php endforeach; ?>
     </select>
     <textarea type="text" name="desc" id="decs" placeholder="Описание" required></textarea>
     <input type="file" name="photo" id="photo" accept="image/jpeg" required>

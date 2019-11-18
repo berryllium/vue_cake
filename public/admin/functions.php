@@ -24,11 +24,25 @@ function getAllCategories($connection)
   return $allCategories;
 }
 
+//вывод всех единиц 
+function getAllUnits($connection)
+{
+  $query = 'SELECT * FROM units';
+  $result = mysqli_query($connection, $query);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $allUnits[] = [
+      'id_units' => $row['id_units'],
+      'units' => $row['units'],
+    ];
+  }
+  return $allUnits;
+}
+
 //вывод всех продуктов
 
 function getAllProducts($connection)
 {
-  $query = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id_cat_cat";
+  $query = "SELECT * FROM products INNER JOIN categories ON products.category_id = categories.id_cat INNER JOIN units ON products.units_id= units.id_units_cat";
   $result = mysqli_query($connection, $query);
   while ($row = mysqli_fetch_assoc($result)) {
     $arr_products[] = [

@@ -19,7 +19,7 @@ if (isset($_GET['create'])) {
 } elseif (isset($_GET['delete'])) {
   $query = "DELETE FROM categories WHERE id_cat = '$action_id'";
   $result = mysqli_query($connection, $query);
-  if ($result) echo $action_id;
+  if ($result) header("Location: " . PATH_ROOT . "/admin/categories.php");
   else echo 'ошибка удаления';
 } elseif (isset($_GET['update'])) {
   $query = "UPDATE `categories` SET `category` = '$action_category' WHERE `id_cat` = '$action_id'";

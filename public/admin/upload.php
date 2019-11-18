@@ -26,11 +26,11 @@ if ($_POST) {
                 $small = $path_small . $photo_name;
 
                 if ($id) {
-                    $query = "UPDATE `products` SET `title` = '$title', `category_id` = '$category', `description` = '$desc', `price` = '$price', `units` = '$units', `path_big` = '$big', `path_small` = '$small' WHERE `products`.`id` = '$id';";
-                } else $query = "INSERT INTO `products` (`id`, `title`, `description`, `category_id`, `price`, `units`, `path_big`, `path_small`) VALUES (NULL, '$title', '$desc', '$category', '$price', '$units', '$big', '$small');";
+                    $query = "UPDATE `products` SET `title` = '$title', `category_id` = '$category', `description` = '$desc', `price` = '$price', `units_id` = '$units', `path_big` = '$big', `path_small` = '$small' WHERE `products`.`id` = '$id';";
+                } else $query = "INSERT INTO `products` (`id`, `title`, `description`, `category_id`, `price`, `units_id`, `path_big`, `path_small`) VALUES (NULL, '$title', '$desc', '$category', '$price', '$units', '$big', '$small');";
             }
         } else echo 'Можно загрузить только изображения в формате .jpg, .png или .gif';
-    } else $query = "UPDATE `products` SET `title` = '$title', `category_id` = '$category', `description` = '$desc', `price` = '$price', `units` = '$units' WHERE `products`.`id` = '$id';";
+    } else $query = "UPDATE `products` SET `title` = '$title', `category_id` = '$category', `description` = '$desc', `price` = '$price', `units_id` = '$units' WHERE `products`.`id` = '$id';";
 } elseif (isset($_GET['delete'])) {
     $id = $_GET['id'];
     $small = PATH_ROOT . $_GET['small'];
