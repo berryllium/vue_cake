@@ -34,7 +34,7 @@ export default {
           email: this.email
         };
         let res = [info,this.allCart]
-        fetch("../php/send.php", {
+        fetch("php/send.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json;charset=utf-8"
@@ -63,7 +63,7 @@ export default {
   justify-content: center;
   display: flex;
   flex-direction: column;
-  background-color: @braun;
+  background-color: @brown;
   padding: 25px;
   width: 330px;
   text-align: center;

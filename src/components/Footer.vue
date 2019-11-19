@@ -3,7 +3,7 @@
     <div class="container">
       <div class="footer-item">
         <h3>Время работы</h3>
-        <p>Работаем каждый день с 9.00 до 21.00</p>
+        <p>{{contacts.work}}</p>
       </div>
       <div class="footer-item">
         <h3>Наши контакты</h3>
@@ -13,20 +13,20 @@
         </p>
         <p>
           Пишите:
-          <a href="mailto: test@yandex.ru">test@yandex.ru</a>
+          <a :href="'mailto: ' + contacts.email">{{contacts.email}}</a>
         </p>
       </div>
       <div class="footer-item">
         <h3>Мы в соцсетях</h3>
         <div class="social-links">
-          <a href="#">
-            <i class="fa fa-vk" aria-hidden="true"></i>
+          <a v-if="contacts.vk != 0" :href="contacts.vk">
+            <i class="fa fa-vk" aria-hidden="true" target="_blank"></i>
           </a>
-          <a href="#">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
+          <a v-if="contacts.inst != 0" :href="contacts.inst">
+            <i class="fa fa-instagram" aria-hidden="true" target="_blank"></i>
           </a>
-          <a href="#">
-            <i class="fa fa-odnoklassniki" aria-hidden="true"></i>
+          <a v-if="contacts.ok != 0" :href="contacts.ok">
+            <i class="fa fa-odnoklassniki" aria-hidden="true" target="_blank"></i>
           </a>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default {
 <style lang="less" scoped>
 @import "../style/variables.less";
 footer {
-  background-color: @braun;
+  background-color: @brown;
   .container {
     display: flex;
     justify-content: space-between;

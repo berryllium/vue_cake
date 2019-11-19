@@ -1,7 +1,7 @@
 export default {
   actions: {
     fetchCatalog(ctx) {
-      fetch("db/catalog.json")
+      fetch("admin/api.php")
         .then(response => response.json())
         .then(json => ctx.commit('updateCatalog', json))
     }
@@ -22,6 +22,14 @@ export default {
     },
     loadingState(state) {
       return state.loading
+    },
+    allCategories(state) {
+      let categories = [];
+      state.catalog.forEach(element => {
+        categories.push(element.category);
+      });
+      categories = [...new Set(categories)];
+      return categories
     }
   }
 }

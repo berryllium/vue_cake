@@ -1,16 +1,16 @@
 <template>
   <div class="product-item">
-    <img :src="this.item.img" alt="photo" />
+    <a :href="this.item.img_big" data-fancybox :data-caption="this.item.name"><img :src="this.item.img" alt="photo" /></a>
     <div class="info">
       <div class="name">{{this.item.name}}</div>
-      <div class="price">{{this.item.price}} руб/кг</div>
-      <div class="desc">Описание</div>
+      <div class="price">{{this.item.price}} руб/{{this.item.units}}</div>
+      <div class="desc">{{this.item.desc}}</div>
+    </div>
       <button
         class="buy"
         @click="buy"
         :class="{added: this.isAdded}"
       >{{this.isAdded ? "В корзине" : "В корзину"}}</button>
-    </div>
   </div>
 </template>
 
@@ -46,6 +46,10 @@ export default {
 @import "../style/variables.less";
 .product-item {
   width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   img {
     width: 350px;
     height: 250px;
@@ -55,13 +59,19 @@ export default {
     }
   }
   .info {
-    padding: 20px;
-    text-align: center;
+    padding-top: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     .name {
       text-transform: uppercase;
       font-size: 18px;
       font-weight: bold;
       margin-bottom: 10px;
+      span {
+        text-transform: lowercase;
+      }
     }
     .price {
       margin-bottom: 5px;
@@ -69,18 +79,20 @@ export default {
     }
     .desc {
       margin-bottom: 10px;
+      text-align: center;
     }
+  }
     .buy {
       width: 150px;
       height: 30px;
       border: none;
       border-radius: 15px;
       outline: none;
-      background-color: @braun;
+      background-color: @brown;
       color: #fff;
       &:hover {
         cursor: pointer;
-        background-color: darken(@braun, 10%);
+        background-color: darken(@brown, 10%);
       }
       &:active {
         transform: scale(0.95);
@@ -89,7 +101,6 @@ export default {
         background-color: @orange;
       }
     }
-  }
   @media (max-width: @phone) {
     width: 300px;
     margin: 0 auto;

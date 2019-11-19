@@ -1,15 +1,15 @@
 <template>
 <body>
-  <Header :contacts="contacts" :cart="allCart" />
+  <Header :contacts="allContacts" :cart="allCart" />
   <main>
     <router-view
-      :contacts="contacts"
+      :contacts="allContacts"
       :products="allCatalog"
       :loading="loadingState"
       @cartOrder="openForm"
     />
   </main>
-  <Footer :contacts="contacts" />
+  <Footer :contacts="allContacts" />
   <transition name="fade">
     <Popup
       :cart="allCart"
@@ -22,10 +22,11 @@
 </template>
 
 <script>
-import $ from "jquery";
+// import $ from "jquery";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Popup from "@/components/Popup";
+
 import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   name: "app",
@@ -37,18 +38,20 @@ export default {
   data() {
     return {
       popupVisible: false,
-      div: true,
-      contacts: {
-        phone: "+7(967)539-02-99",
-        email: "test@yandex.ru"
-      }
+      div: true
     };
   },
   computed: {
-    ...mapGetters(["allCatalog", "loadingState", "allCart", "getJsonCart"])
+    ...mapGetters([
+      "allContacts",
+      "allCatalog",
+      "loadingState",
+      "allCart",
+      "getJsonCart"
+    ])
   },
   methods: {
-    ...mapActions(["fetchCatalog"]),
+    ...mapActions(["fetchCatalog", "fetchContacts"]),
     ...mapMutations(["clearCart"]),
     openForm() {
       this.popupVisible = true;
@@ -63,14 +66,18 @@ export default {
         }
       } else {
         console.log("submit");
-        this.clearCart()
+        this.clearCart();
         setTimeout(() => (this.popupVisible = false), 2000);
       }
     }
   },
   mounted() {
-    this.$store.commit("setCart");
     this.fetchCatalog();
+    this.fetchContacts();
+    var $ = require("jquery");
+    window.jQuery = $;
+    require("@fancyapps/fancybox");
+    this.$store.commit("setCart");
     // мобильное меню
     $(".menu-btn").on("click", function(e) {
       e.preventDefault();
@@ -87,6 +94,8 @@ export default {
 </script>
 
 <style lang="less">
+@import url("style/font-awesome.css");
+@import url("style/jquery.fancybox.css");
 @import url("style/normalize.css");
 @import url("style/variables.less");
 @import url("style/style.less");

@@ -2,15 +2,8 @@
   <section class="intro">
     <div class="container">
       <div class="left">
-        <h2>Кондитерская на дому</h2>
-        <div class="text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae maiores eveniet enim.
-          Fuga aliquid molestias quia veniam voluptatibus inventore dignissimos dolorem quisquam accusantium?
-          Reprehenderit reiciendis asperiores fuga, saepe et illo quidem facilis voluptatum corporis, qui, quisquam
-          magni esse dicta doloremque pariatur quaerat veniam cum? Aperiam, vitae facilis obcaecati, quis laborum ut
-          inventore quidem recusandae totam quam distinctio perferendis expedita porro eius deleniti. Sunt qui
-          pariatur sit fuga, nemo quia necessitatibu.
-        </div>
+        <h2>{{contacts.header}}</h2>
+        <div class="page-text-content" v-html="contacts.delivery"></div>
       </div>
       <div class="right">
         <div class="main-form">
@@ -29,140 +22,136 @@
 </template>
 <script>
 export default {
+  props: ["contacts"],
   data() {
     return {
       isSubmit: false,
-      name: '',
-      phone: '',
-      email: ''
-    }
+      name: "",
+      phone: "",
+      email: ""
+    };
   },
   methods: {
     submit() {
       let info = {
-        source: 'Главная',
+        source: "Главная",
         name: this.name,
         phone: this.phone,
         email: this.email
-      }
+      };
       fetch("../php/send.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8"
-          },
-          body: JSON.stringify(info)
-        })
-          .then(response => response.text())
-          .then(answer => {
-            console.log(answer)
-            if(answer == 'OK') {
-              this.isSubmit = true
-              this.name = this.phone = this.email = "";
-              setTimeout(() => this.isSubmit = false, 2000)
-            }
-          });
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify(info)
+      })
+        .then(response => response.text())
+        .then(answer => {
+          console.log(answer);
+          if (answer == "OK") {
+            this.isSubmit = true;
+            this.name = this.phone = this.email = "";
+            setTimeout(() => (this.isSubmit = false), 2000);
+          }
+        });
     }
   }
-}
+};
 </script>
 <style lang="less" scoped>
 @import "../style/variables.less";
-  .intro {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-      url(../img/bg1.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 800px;
-    @media (max-width: @phone) {
-      background-position: 50%;
+.intro {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../img/bg1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 800px;
+  @media (max-width: @phone) {
+    background-position: 50%;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 50px;
+    .left,
+    .right {
+      width: 50%;
+      padding: 20px;
+      @media (max-width: @phone) {
+        width: 100%;
+        padding: 0;
+      }
     }
-    .container {
+
+    .left {
+      color: #fff;
+
+      h2 {
+        margin-top: 0;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+      }
+      @media (max-width: @phone) {
+        padding: 10px;
+      }
+    }
+
+    .right {
       display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      padding-top: 50px;
-      .left,
-      .right {
-        width: 50%;
+      justify-content: center;
+
+      .main-form {
+        background-color: @brown;
         padding: 20px;
+        width: 330px;
+        text-align: center;
+        color: #fff;
         @media (max-width: @phone) {
           width: 100%;
-          padding: 0;
         }
-      }
-
-      .left {
-        color: #fff;
-
-        h2 {
-          margin-top: 0;
-          margin-bottom: 30px;
+        .title {
+          font-size: 24px;
           text-transform: uppercase;
         }
 
-        .text {
-          font-size: 18px;
-          line-height: 150%;
+        .subtitle {
+          margin-bottom: 20px;
         }
-        @media (max-width: @phone) {
-          padding: 10px;
-        }
-      }
 
-      .right {
-        display: flex;
-        justify-content: center;
+        form {
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          width: 80%;
 
-        .main-form {
-          background-color: @braun;
-          padding: 20px;
-          width: 330px;
-          text-align: center;
-          color: #fff;
-          @media (max-width: @phone) {
-            width: 100%;
-          }
-          .title {
-            font-size: 24px;
-            text-transform: uppercase;
-          }
-
-          .subtitle {
+          input {
+            font-size: 18px;
+            height: 30px;
             margin-bottom: 20px;
+            padding-left: 10px;
           }
 
-          form {
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-
-            input {
-              font-size: 18px;
-              height: 30px;
-              margin-bottom: 20px;
-              padding-left: 10px;
+          [type="submit"] {
+            background-color: @orange;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            border-radius: 10px;
+            height: auto;
+            padding: 10px 0;
+            &:hover {
+              background: darken(@orange, 5%);
             }
-
-            [type="submit"] {
-              background-color: @orange;
-              border: none;
-              cursor: pointer;
-              outline: none;
-              color: #fff;
-              border-radius: 10px;
-              height: auto;
-              padding: 10px 0;
-              &:hover {
-                background: darken(@orange, 5%);
-              }
-              &:active {
-                transform: scale(0.99);
-              }
+            &:active {
+              transform: scale(0.99);
             }
           }
         }
       }
     }
   }
+}
 </style>
