@@ -15,7 +15,7 @@
   </header>
   <main class="container">
     <div class="row">
-      <div class="col-12">
+      <nav class="col-12">
       <?php if ($_SESSION['admin']): ?>
         <a class="menu-link" href="login.php?exit=exit">Выход</a>
         <a class="menu-link" href="changepass.php">Смена пароля</a>
@@ -24,4 +24,4 @@
         <a class="menu-link" href="units.php">Единицы измерения</a>
         <a class="menu-link" href="contacts.php">Мои контакты</a>
       <?php endif;?>
-      </div>
+      </nav>
