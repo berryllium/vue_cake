@@ -1,2 +1,5 @@
 u435826_tortik (БД и логин)
 0V9u5A9k
+
+admin
+Tortik261

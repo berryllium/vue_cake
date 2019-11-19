@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Ноя 18 2019 г., 17:19
+-- Время создания: Ноя 19 2019 г., 10:59
 -- Версия сервера: 5.5.64-MariaDB
 -- Версия PHP: 5.4.16
 
@@ -29,15 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `categories` (
   `id_cat` int(11) NOT NULL,
   `category` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `categories`
 --
 
 INSERT INTO `categories` (`id_cat`, `category`) VALUES
-(1, 'торты'),
-(2, 'пирожные');
+(1, 'Торты'),
+(2, 'Пирожные'),
+(3, 'Закусочные тортики'),
+(4, 'Кремовые тортики'),
+(5, 'Букет');
 
 -- --------------------------------------------------------
 
@@ -45,7 +48,7 @@ INSERT INTO `categories` (`id_cat`, `category`) VALUES
 -- Структура таблицы `contacts`
 --
 
-CREATE TABLE `contacts` (
+CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(100) NOT NULL,
   `phone` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
@@ -82,7 +85,17 @@ CREATE TABLE IF NOT EXISTS `products` (
   `units_id` varchar(20) NOT NULL,
   `path_big` varchar(150) NOT NULL,
   `path_small` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `products`
+--
+
+INSERT INTO `products` (`id`, `title`, `category_id`, `description`, `price`, `units_id`, `path_big`, `path_small`) VALUES
+(1, 'Ежик', 1, 'Вкуснейший тортик, пальчики оближешь', 390, '3', '/db/images/big/8f9507d2dd_ejik.jpg', '/db/images/small/8f9507d2dd_ejik.jpg'),
+(2, 'Книга жизни', 4, 'Нежный бисквит с необычной начинкой и кремовым украшением', 350, '3', '/db/images/big/41796672c4_i.jpg', '/db/images/small/41796672c4_i.jpg'),
+(3, 'Тортик для охотника', 3, 'Прекрасный подарок для мужчин', 280, '3', '/db/images/big/9ab7b03b83_2.jpg', '/db/images/small/9ab7b03b83_2.jpg'),
+(4, 'Букет', 5, 'Необычный подарок для любимого', 500, '1', '/db/images/big/3345e41fba_i_(1).jpg', '/db/images/small/3345e41fba_i_(1).jpg');
 
 -- --------------------------------------------------------
 
@@ -101,8 +114,29 @@ CREATE TABLE IF NOT EXISTS `units` (
 
 INSERT INTO `units` (`id_units`, `units`) VALUES
 (1, 'шт.'),
-(3, 'кг.'),
+(3, 'кг'),
 (4, 'уп.');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(100) NOT NULL,
+  `login` varchar(100) NOT NULL,
+  `pass` varchar(32) NOT NULL,
+  `role` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `login`, `pass`, `role`, `name`) VALUES
+(1, 'admin', '6bda543f66da02541990bd12081dc79f', 'admin', 'Администратор');
 
 --
 -- Индексы сохранённых таблиц
@@ -113,12 +147,6 @@ INSERT INTO `units` (`id_units`, `units`) VALUES
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id_cat`);
-
---
--- Индексы таблицы `contacts`
---
-ALTER TABLE `contacts`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `products`
@@ -133,6 +161,13 @@ ALTER TABLE `units`
   ADD PRIMARY KEY (`id_units`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `login` (`login`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -140,22 +175,22 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT для таблицы `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT для таблицы `contacts`
---
-ALTER TABLE `contacts`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `units`
 --
 ALTER TABLE `units`
   MODIFY `id_units` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
