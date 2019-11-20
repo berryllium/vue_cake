@@ -13,7 +13,7 @@
           <address>
             <p>
               <i class="fa fa-map-marker"></i>
-              <span>c.Натальино, ул. Революционная, д.93</span>
+              <span>{{contacts.address}}</span>
             </p>
             <p>
               <i class="fa fa-envelope-o"></i>
