@@ -3,7 +3,7 @@
     <a :href="this.item.img_big" data-fancybox :data-caption="this.item.name"><img :src="this.item.img" alt="photo" /></a>
     <div class="info">
       <div class="name">{{this.item.name}}</div>
-      <div class="cat">{{this.item.category}}</div>
+      <div class="cat">({{this.item.category}})</div>
       <div class="price">{{this.item.price}} руб/{{this.item.units}}</div>
       <div class="desc">{{this.item.desc}}</div>
     </div>
@@ -69,11 +69,11 @@ export default {
       text-transform: uppercase;
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 10px;
     }
     .cat {
       text-transform: lowercase;
       font-size: 16px;
+      margin-bottom: 10px;
     }
     .price {
       margin-bottom: 5px;
