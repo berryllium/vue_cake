@@ -62,13 +62,18 @@ export default {
 <style lang="less" scoped>
 @import "../style/variables.less";
 .intro {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(../img/bg1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  min-height: 800px;
   @media (max-width: @phone) {
     background-position: 50%;
+    position: static;
   }
   .container {
     display: flex;
