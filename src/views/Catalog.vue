@@ -118,10 +118,16 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   gap: (1200-350 * 3)/2px;
   padding: 20px 0;
+    @media (min-width: @phone) and (max-width: 1199px) {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    gap: 20px;
+  }
   @media (max-width: @phone) {
     width: 100%;
     grid-template-columns: 1fr;
-    justify-content: center;
+    justify-content: center;  
     gap: 15px;
   }
 }

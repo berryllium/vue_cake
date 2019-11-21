@@ -62,7 +62,8 @@ export default {
   },
   computed: {
     mapWidth() {
-      if (document.documentElement.clientWidth > 768) return 550;
+      if (document.documentElement.clientWidth < 1200 && document.documentElement.clientWidth > 768) return 450;
+      else if (document.documentElement.clientWidth > 768) return 550;
       else return document.documentElement.clientWidth;
     },
     mapHeight() {
