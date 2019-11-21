@@ -5,7 +5,7 @@
       <div class="wrap">
         <div class="map">
           <iframe
-            src="https://yandex.ru/map-widget/v1/?um=constructor%3Acdda55db439583887354173f87b390bf93f3ddf89dd8b787aa37b66b1e2bb87d&amp;source=constructor"
+            src="https://yandex.ru/map-widget/v1/?um=constructor%3Af2af1ab7cb236d79fed32002291dfe8e86c7eee0d4d75a44a5ceea479f2fc631&amp;source=constructor"
             :width="mapWidth"
             :height="mapHeight"
             frameborder="0"

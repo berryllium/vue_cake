@@ -179,6 +179,9 @@ header {
             font-size: 24px;
             transition: 0.2s;
 
+            @media (min-width: @phone) and (max-width: 1199px) {
+              font-size: 18px;
+            }
             @media (max-width: @phone) {
               color: @yellow;
             }
